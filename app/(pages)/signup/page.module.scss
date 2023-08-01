@@ -1,0 +1,63 @@
+.signUpPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 50px 0;
+  background-color: lightcoral;
+
+  &__form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: min(500px, 90%);
+
+    &_header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+
+      > div {
+        h2 {
+          font-size: var(--md-font);
+        }
+
+        p {
+          font-size: var(--sm-font);
+          color: var(--gray-700);
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      //   gap: max(2vw, 15px);
+      gap: clamp(15px, 2vw, 24px);
+
+      > div:first-child {
+        display: flex;
+        gap: clamp(15px, 2vw, 24px);
+
+        > * {
+          flex: 1;
+        }
+      }
+
+      button {
+        background-color: var(--primary-color);
+        padding: max(2vh, 15px) max(2vw, 15px);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: var(--sm-font);
+      }
+    }
+  }
+}

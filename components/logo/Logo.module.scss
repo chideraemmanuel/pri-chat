@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  svg {
+    font-size: var(--lg-font);
+  }
+
+  span {
+    font-size: var(--md-font);
+  }
+}
