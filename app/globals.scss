@@ -32,13 +32,13 @@
     rgb(225, 234, 238) 90%
   );
 
+  --chat-box-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
   // --bg-gradient: radial-gradient(
   //   1086px at 1.1% 96.2%,
   //   rgb(1, 44, 66) 0%,
   //   rgb(163, 221, 253) 53.6%
   // );
-
-  // --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 
   // --bg-gradient: radial-gradient(
   //   circle at -2.2% -3.8%,
@@ -124,6 +124,12 @@
       circle at 18.7% 37.8%,
       rgb(45, 48, 48) 0%,
       rgb(28, 28, 28) 90%
+    );
+
+    --chat-box-gradient: linear-gradient(
+      109.6deg,
+      rgba(0, 37, 84, 0.32) 100.2%,
+      rgb(0, 37, 84) 11.2%
     );
 
     --gray-100: #1a1a1a;
