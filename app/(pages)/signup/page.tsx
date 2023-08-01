@@ -1,6 +1,7 @@
 import Logo from "@/components/logo/Logo";
 import styles from "./page.module.scss";
 import FormInput from "@/components/formInput/FormInput";
+import Link from "next/link";
 
 const SignUp: React.FC = () => {
   return (
@@ -25,6 +26,10 @@ const SignUp: React.FC = () => {
 
           <button>Sign up</button>
         </form>
+
+        <p>
+          Already have an account? <Link href="/login">Login</Link>
+        </p>
       </div>
     </div>
   );

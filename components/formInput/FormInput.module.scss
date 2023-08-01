@@ -14,6 +14,11 @@
       border: 1px solid var(--gray-500);
       border-radius: 5px;
       font-size: var(--sm-font);
+      background-color: #fff;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: var(--gray-300);
+      }
 
       @media screen and (max-width: 1024px) {
         width: calc(16px / 15px * 100%);
@@ -49,31 +54,35 @@
         ~ span {
           //   display: none;
           //   transform: scale(calc(12px / 16px)) translateY(calc(-100% + 10px));
-          transform: translateY(calc(-100% + 10px)) !important;
+          transform: scale(0.9) translateY(calc(-100% + 10px)) !important;
           background-color: #fff;
           padding: 0 3px;
           color: var(--primary-color);
 
+          @media (prefers-color-scheme: dark) {
+            background-color: var(--gray-100);
+          }
+
           @media screen and (max-width: 1024px) {
-            transform: scale(calc(15px / 16px)) translateY(calc(-100% + 10px)) !important;
-            transform-origin: left top;
-            margin-bottom: -6.6666666px;
-          }
-
-          @media screen and (max-width: 768px) {
-            transform: scale(calc(14px / 16px)) translateY(calc(-100% + 10px)) !important;
-            transform-origin: left top;
-            margin-bottom: -6.6666666px;
-          }
-
-          @media screen and (max-width: 540px) {
             transform: scale(calc(13px / 16px)) translateY(calc(-100% + 10px)) !important;
             transform-origin: left top;
             margin-bottom: -6.6666666px;
           }
 
-          @media screen and (max-width: 420px) {
+          @media screen and (max-width: 768px) {
             transform: scale(calc(12px / 16px)) translateY(calc(-100% + 10px)) !important;
+            transform-origin: left top;
+            margin-bottom: -6.6666666px;
+          }
+
+          @media screen and (max-width: 540px) {
+            transform: scale(calc(11px / 16px)) translateY(calc(-100% + 10px)) !important;
+            transform-origin: left top;
+            margin-bottom: -6.6666666px;
+          }
+
+          @media screen and (max-width: 420px) {
+            transform: scale(calc(10px / 16px)) translateY(calc(-100% + 10px)) !important;
             transform-origin: left top;
             margin-bottom: -6.6666666px;
           }
@@ -91,30 +100,30 @@
 
       ~ span {
         // transform: scale(calc(12px / 16px)) translateY(calc(-100% + 10px)) !important;
-        transform: translateY(calc(-100% + 10px)) !important;
+        transform: scale(0.9) translateY(calc(-100% + 10px)) !important;
         background-color: #fff;
         padding: 0 3px !important;
 
         @media screen and (max-width: 1024px) {
-          transform: scale(calc(15px / 16px)) translateY(calc(-100% + 10px)) !important;
-          transform-origin: left top;
-          margin-bottom: -6.6666666px;
-        }
-
-        @media screen and (max-width: 768px) {
-          transform: scale(calc(14px / 16px)) translateY(calc(-100% + 10px)) !important;
-          transform-origin: left top;
-          margin-bottom: -6.6666666px;
-        }
-
-        @media screen and (max-width: 540px) {
           transform: scale(calc(13px / 16px)) translateY(calc(-100% + 10px)) !important;
           transform-origin: left top;
           margin-bottom: -6.6666666px;
         }
 
-        @media screen and (max-width: 420px) {
+        @media screen and (max-width: 768px) {
           transform: scale(calc(12px / 16px)) translateY(calc(-100% + 10px)) !important;
+          transform-origin: left top;
+          margin-bottom: -6.6666666px;
+        }
+
+        @media screen and (max-width: 540px) {
+          transform: scale(calc(11px / 16px)) translateY(calc(-100% + 10px)) !important;
+          transform-origin: left top;
+          margin-bottom: -6.6666666px;
+        }
+
+        @media screen and (max-width: 420px) {
+          transform: scale(calc(10px / 16px)) translateY(calc(-100% + 10px)) !important;
           transform-origin: left top;
           margin-bottom: -6.6666666px;
         }
@@ -160,6 +169,18 @@
         transform-origin: left top;
         margin-bottom: -6.6666666px;
       }
+    }
+
+    &_passwordToggle {
+      position: absolute;
+      top: 0;
+      right: max(0.7vw, 10px);
+      padding: max(0.7vw, 10px);
+      padding-right: 0;
+      z-index: 2;
+      font-size: var(--sm-font);
+      color: var(--gray-700);
+      cursor: pointer;
     }
   }
 }

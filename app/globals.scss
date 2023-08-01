@@ -1,9 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+
+// font-family: 'Dancing Script', cursive;
+
+@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
+
+// font-family: 'Yellowtail', cursive;
+
+@import url("https://fonts.googleapis.com/css2?family=Ephesis&display=swap");
+
+// font-family: 'Ephesis', cursive;
+
+@import url("https://fonts.googleapis.com/css2?family=Birthstone&display=swap");
+
+// font-family: 'Birthstone', cursive;
+
 :root {
+  --dancingScript: "Dancing Script", cursive;
+  --yellowtail: "Yellowtail", cursive;
+  --ephesis: "Ephesis", cursive;
+  --birthstone: "Birthstone", cursive;
+
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  --bg-gradient: radial-gradient(
+    circle at 18.7% 37.8%,
+    rgb(250, 250, 250) 0%,
+    rgb(225, 234, 238) 90%
+  );
+
+  // --bg-gradient: radial-gradient(
+  //   1086px at 1.1% 96.2%,
+  //   rgb(1, 44, 66) 0%,
+  //   rgb(163, 221, 253) 53.6%
+  // );
+
+  // --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+  // --bg-gradient: radial-gradient(
+  //   circle at -2.2% -3.8%,
+  //   rgba(255, 227, 2, 0.41) 0%,
+  //   rgb(59, 188, 241) 100.2%
+  // );
+
+  // --bg-gradient: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+
+  // --bg-gradient: linear-gradient(
+  //   109.6deg,
+  //   rgba(0, 37, 84, 0.32) 100.2%,
+  //   rgb(0, 37, 84) 11.2%
+  // );
+
+  // --bg-gradient: linear-gradient(
+  //   109.6deg,
+  //   rgb(120, 201, 244) 100.2%,
+  //   rgb(27, 27, 79) 11.2%
+  // );
 
   --gray-100: #f2f2f2;
   --gray-200: #ebebeb;
@@ -23,6 +78,7 @@
   --border-radius: 12px;
 
   // FONT SIZES
+  --xs-font: clamp(0.75rem, 0.7021rem + 0.2128vw, 0.875rem);
   --sm-font: clamp(0.875rem, 0.831rem + 0.1878vw, 1rem);
   --base-font: clamp(1rem, 0.934rem + 0.2817vw, 1.1875rem);
   --md-font: clamp(1.25rem, 1.14rem + 0.4695vw, 1.5625rem);
@@ -32,7 +88,7 @@
   --xxxl-font: clamp(3.0625rem, 2.3803rem + 2.9108vw, 5rem);
 
   // *******************
-  --primary-color: #111;
+  --primary-color: rgb(47, 84, 235);
   --secondary-color: #fff;
   --accent: #c9c9c9;
 
@@ -64,6 +120,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --bg-gradient: radial-gradient(
+      circle at 18.7% 37.8%,
+      rgb(45, 48, 48) 0%,
+      rgb(28, 28, 28) 90%
+    );
+
     --gray-100: #1a1a1a;
     --gray-200: #1f1f1f;
     --gray-300: #292929;
@@ -76,7 +138,6 @@
     --gray-1000: #221d1d;
 
     // ***************
-    --primary-color: #fff;
     --secondary-color: #000;
     --accent: #7d7d7d;
 
