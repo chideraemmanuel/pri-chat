@@ -17,6 +17,10 @@
       border-right: none;
     }
 
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+
     &::-webkit-scrollbar {
       width: 5px;
       opacity: 0;
@@ -101,9 +105,9 @@
     display: grid;
     grid-template-rows: auto 1fr;
 
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
+    // @media screen and (max-width: 768px) {
+    //   display: none;
+    // }
 
     &_head {
       padding: 10px 15px;

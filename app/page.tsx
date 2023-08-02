@@ -1,8 +1,9 @@
 import Chats from "@/containers/chats/Chats";
 import styles from "./page.module.scss";
-import { FiMenu, FiSearch } from "react-icons/fi";
+import { FiImage, FiMenu, FiSearch, FiSend } from "react-icons/fi";
 import profileImage from "@/assets/profile.jpg";
 import Image from "next/image";
+import ConversationBox from "@/containers/conversationBox/ConversationBox";
 
 const Homepage: React.FC = () => {
   return (
@@ -38,9 +39,32 @@ const Homepage: React.FC = () => {
             </div>
           </div>
         </div>
+
         <div className={styles.homepage__right_convo}>
-          <span>convo</span>
+          <ConversationBox />
         </div>
+
+        {/* <div className={styles.homepage__right_input}>
+          <div>
+            <textarea
+              name="message"
+              id=""
+              //   cols="30"
+              //   rows="10"
+              //   onClick={() => console.log("hello")}
+              placeholder="Message"
+            />
+
+            <input type="file" name="" id="attachment" />
+            <label htmlFor="attachment">
+              <FiImage />
+            </label>
+          </div>
+
+          <div>
+            <FiSend />
+          </div>
+        </div> */}
       </div>
     </main>
   );
