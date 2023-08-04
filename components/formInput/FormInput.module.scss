@@ -104,6 +104,10 @@
         background-color: #fff;
         padding: 0 3px !important;
 
+        @media (prefers-color-scheme: dark) {
+          background-color: var(--gray-100);
+        }
+
         @media screen and (max-width: 1024px) {
           transform: scale(calc(13px / 16px)) translateY(calc(-100% + 10px)) !important;
           transform-origin: left top;

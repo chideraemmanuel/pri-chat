@@ -11,7 +11,7 @@ const ConversationBox: React.FC = () => {
         <Message type="sent" text="Hello" />
         <Message type="received" text="How are you doing?" />
         <Message type="received" text="And how is your day unfolding?" />
-        <Message type="received" text="Hi" />
+        {/* <Message type="received" text="Hi" />
         <Message type="sent" text="Hello" />
         <Message type="received" text="How are you doing?" />
         <Message type="received" text="And how is your day unfolding?" />
@@ -26,8 +26,7 @@ const ConversationBox: React.FC = () => {
         <Message type="received" text="Hi" />
         <Message type="sent" text="Hello" />
         <Message type="received" text="How are you doing?" />
-        <Message type="received" text="And how is your day unfolding?" />
-        {/* <Message type="sent" text="Hi"/> */}
+        <Message type="received" text="And how is your day unfolding?" /> */}
       </div>
       <div className={styles.conversationBox__input}>
         <div>

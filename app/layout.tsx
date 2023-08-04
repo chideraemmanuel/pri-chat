@@ -1,6 +1,10 @@
+import ReduxProvider from "@/redux/ReduxProvider";
 import "./globals.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/config/firebase";
+import AuthContainer from "@/containers/authContainer/AuthContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +18,41 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // onAuthStateChanged(auth, (user) => {
+  //   console.log("from layout", user);
+  // });
+
+  //   const dispatch = useDispatch();
+
+  // const router = useRouter();
+
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     dispatch(
+  //       setCurrentUser({
+  //         isLoading: false,
+  //         active: true,
+  //       })
+  //     );
+  //     router.replace("/");
+  //   } else if (!user) {
+  //     dispatch(
+  //       setCurrentUser({
+  //         isLoading: false,
+  //         active: false,
+  //       })
+  //     );
+  //     router.replace("/login");
+  //   }
+  // });
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ReduxProvider>
+        <AuthContainer>
+          <body className={inter.className}>{children}</body>
+        </AuthContainer>
+      </ReduxProvider>
     </html>
   );
 }
