@@ -1,17 +1,36 @@
 import Image from "next/image";
 import styles from "./Chat.module.scss";
 import profileImage from "@/assets/profile.jpg";
+import { useGetUser } from "@/hooks/useGetUser";
 
-const Chat: React.FC = () => {
+interface Props {
+  senderUid: string;
+  createdAt: string;
+  latestMessage: {
+    text: string;
+    image: null | string;
+  };
+}
+
+const Chat: React.FC<Props> = ({
+  senderUid,
+  createdAt,
+  latestMessage: { text, image },
+}) => {
+  const { data: sender } = useGetUser(senderUid);
+
   return (
     <div className={styles.chat}>
       <div className={styles.chat__info}>
         <div className={styles.chat__info_image}>
-          <Image src={profileImage} alt="" />
+          <Image src={sender?.profileImage ?? profileImage} alt="" />
         </div>
         <div className={styles.chat__info_content}>
-          <h3>Sender's name</h3>
-          <p>What's up?</p>
+          <h3>
+            {sender?.firstName} {sender?.lastName}
+          </h3>
+          {/* <p>What's up?</p> */}
+          {text && <p>{text}</p>}
         </div>
       </div>
 

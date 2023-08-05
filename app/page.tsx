@@ -12,6 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreTypes } from "@/redux/store";
 import { setCurrentUser } from "@/redux/slices/authSlice";
+import { useGetUser } from "@/hooks/useGetUser";
 
 const Homepage: React.FC = () => {
   const { isLoading, active } = useSelector(
@@ -22,33 +23,7 @@ const Homepage: React.FC = () => {
 
   const router = useRouter();
 
-  // console.log("from homepage", auth.currentUser);
-
-  // if (!auth.currentUser) {
-  //   // router.push("/login");
-  //   router.replace("/login");
-  //   return;
-  // }
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     dispatch(
-  //       setCurrentUser({
-  //         isLoading: false,
-  //         active: true,
-  //       })
-  //     );
-  //     return;
-  //   } else if (!user) {
-  //     dispatch(
-  //       setCurrentUser({
-  //         isLoading: false,
-  //         active: false,
-  //       })
-  //     );
-  //     router.replace("/login");
-  //   }
-  // });
+  const { data: user } = useGetUser();
 
   return (
     <>
@@ -66,11 +41,11 @@ const Homepage: React.FC = () => {
                 </button>
 
                 <button>
-                  <Image src={profileImage} alt="" />
+                  <Image src={user?.profileImage ?? profileImage} alt="" />
                 </button>
               </div>
             </div>
-            <Chats />
+            <Chats uid="1" />
           </div>
           <div className={styles.homepage__right}>
             <div className={styles.homepage__right_head}>

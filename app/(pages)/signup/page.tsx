@@ -34,10 +34,19 @@ const SignUp: React.FC = () => {
 
   // console.log("from sign up page", auth.currentUser);
 
+  const { mutate: signUp, isLoading: isSigningUp } = useSignUp();
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    useSignUp({
+    // useSignUp({
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   password,
+    // });
+
+    signUp({
       firstName,
       lastName,
       email,
@@ -111,7 +120,8 @@ const SignUp: React.FC = () => {
                 setValue={setSignUpPassword}
               />
 
-              <button>Sign up</button>
+              {/* <button>Sign up</button> */}
+              <button>{isSigningUp ? "Creating account..." : "Sign up"}</button>
             </form>
 
             <p>

@@ -11,6 +11,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { setCurrentUser } from "@/redux/slices/authSlice";
 import { useRouter } from "next/navigation";
+import { useLogin } from "@/hooks/useLogin";
+import { FormEvent } from "react";
 
 const LoginPage: React.FC = () => {
   const { email, password } = useSelector(
@@ -24,6 +26,17 @@ const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
+
+  const { mutate: login, isLoading: isLoggingIn } = useLogin();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    login({
+      email,
+      password,
+    });
+  };
 
   // onAuthStateChanged(auth, (user) => {
   //   if (user) {
@@ -58,7 +71,7 @@ const LoginPage: React.FC = () => {
               </div>
             </div>
 
-            <form>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <FormInput
                 type="email"
                 placeholder="Enter your email"

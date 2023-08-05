@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import AuthContainer from "@/containers/authContainer/AuthContainer";
+import ReactQueryProvider from "@/containers/ReactQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,9 +50,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReduxProvider>
-        <AuthContainer>
-          <body className={inter.className}>{children}</body>
-        </AuthContainer>
+        <ReactQueryProvider>
+          <AuthContainer>
+            <body className={inter.className}>{children}</body>
+          </AuthContainer>
+        </ReactQueryProvider>
       </ReduxProvider>
     </html>
   );
