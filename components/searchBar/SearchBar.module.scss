@@ -1,0 +1,60 @@
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+
+  form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    input {
+      font-size: 16px;
+      width: 100%;
+      padding: max(0.7vw, 10px);
+      outline: none;
+      border: 1px solid var(--gray-500);
+      border-radius: 15px;
+      font-size: var(--sm-font);
+      background-color: #fff;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: var(--gray-300);
+      }
+
+      @media screen and (max-width: 1024px) {
+        // width: calc(16px / 15px * 100%);
+        transform: scaleY(calc(15px / 16px));
+        transform-origin: left top;
+        margin-bottom: -6.6666666px;
+      }
+
+      @media screen and (max-width: 768px) {
+        // width: calc(16px / 14px * 100%);
+        transform: scaleY(calc(14px / 16px));
+        transform-origin: left top;
+        margin-bottom: -6.6666666px;
+      }
+
+      @media screen and (max-width: 540px) {
+        // width: calc(16px / 13px * 100%);
+        transform: scaleY(calc(13px / 16px));
+        transform-origin: left top;
+        margin-bottom: -6.6666666px;
+      }
+
+      @media screen and (max-width: 420px) {
+        // width: calc(16px / 12px * 100%);
+        transform: scaleY(calc(12px / 16px));
+        transform-origin: left top;
+        margin-bottom: -8.6666666px;
+      }
+    }
+
+    button {
+      //   flex: auto;
+    }
+  }
+}

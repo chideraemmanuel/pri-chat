@@ -8,22 +8,31 @@ import Image from "next/image";
 import ConversationBox from "@/containers/conversationBox/ConversationBox";
 import { auth } from "@/config/firebase";
 import { useRouter } from "next/navigation";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreTypes } from "@/redux/store";
 import { setCurrentUser } from "@/redux/slices/authSlice";
 import { useGetUser } from "@/hooks/useGetUser";
+import { openSearchBar } from "@/redux/slices/navigationSlice";
+import SearchBar from "@/components/searchBar/SearchBar";
+import SearchResults from "@/containers/searchResults/SearchResults";
 
 const Homepage: React.FC = () => {
   const { isLoading, active } = useSelector(
     (store: StoreTypes) => store.auth.currentUser
   );
 
+  const { searchBarActive } = useSelector(
+    (store: StoreTypes) => store.navigation
+  );
+
   const dispatch = useDispatch();
 
   const router = useRouter();
 
-  const { data: user } = useGetUser();
+  const { data: user } = useGetUser(auth.currentUser?.uid);
+
+  // signOut(auth);
 
   return (
     <>
@@ -31,21 +40,35 @@ const Homepage: React.FC = () => {
         <main className={styles.homepage}>
           <div className={styles.homepage__left}>
             <div className={styles.homepage__left_head}>
-              <button>
-                <FiMenu />
-              </button>
+              {!searchBarActive && (
+                // <div className={styles.homepage__left_head__nav}>
+                <>
+                  <button>
+                    <FiMenu />
+                  </button>
 
-              <div>
-                <button>
-                  <FiSearch />
-                </button>
+                  <div>
+                    <button onClick={() => dispatch(openSearchBar())}>
+                      <FiSearch />
+                    </button>
 
-                <button>
-                  <Image src={user?.profileImage ?? profileImage} alt="" />
-                </button>
-              </div>
+                    <button>
+                      <Image src={user?.profileImage ?? profileImage} alt="" />
+                    </button>
+                  </div>
+                </>
+                // </div>
+              )}
+
+              {/* <div className={styles.homepage__left_head__search}>
+
+              </div> */}
+              {searchBarActive && <SearchBar />}
             </div>
-            <Chats uid="1" />
+
+            {!searchBarActive && <Chats uid="1" />}
+
+            {searchBarActive && <SearchResults />}
           </div>
           <div className={styles.homepage__right}>
             <div className={styles.homepage__right_head}>
@@ -62,7 +85,7 @@ const Homepage: React.FC = () => {
             </div>
 
             <div className={styles.homepage__right_convo}>
-              <ConversationBox />
+              {/* <ConversationBox /> */}
             </div>
 
             {/* <div className={styles.homepage__right_input}>

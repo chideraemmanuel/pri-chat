@@ -17,9 +17,9 @@
       border-right: none;
     }
 
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
+    // @media screen and (max-width: 768px) {
+    //   display: none;
+    // }
 
     &::-webkit-scrollbar {
       width: 5px;
@@ -53,6 +53,7 @@
       background-color: #fff;
       position: sticky;
       top: 0;
+      height: calc(var(--xl-font) + 20px);
 
       @media (prefers-color-scheme: dark) {
         background-color: var(--secondary-color);
@@ -68,6 +69,7 @@
         border-radius: 50%;
         display: flex;
         align-items: center;
+        justify-content: center;
         transition: 0.2s ease;
 
         &:hover {
@@ -105,9 +107,9 @@
     display: grid;
     grid-template-rows: auto 1fr;
 
-    // @media screen and (max-width: 768px) {
-    //   display: none;
-    // }
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
 
     &_head {
       padding: 10px 15px;

@@ -1,0 +1,12 @@
+.searchResults {
+  padding: 0 15px;
+  padding-top: 15px;
+
+  > span {
+    color: var(--gray-700);
+    font-size: var(--sm-font);
+    display: block;
+    padding-bottom: 15px;
+    text-align: center;
+  }
+}

@@ -21,26 +21,27 @@ const Chats: React.FC<Props> = ({ uid }) => {
 
   const data = useGetChats();
 
-  const chats = [
-    {
-      senderUid: "",
-      createdAt: "",
-      latestMessage: {
-        text: "Hey there!",
-        image: null,
-      },
-    },
+  const chats: any[] | [] = [
+    // {
+    //   senderUid: "",
+    //   createdAt: "",
+    //   latestMessage: {
+    //     text: "Hey there!",
+    //     image: null,
+    //   },
+    // },
   ];
 
   return (
     <div className={styles.chats}>
-      {/* {data.map((chat) => (
-        <Chat />
-      ))} */}
-      {chats.map((chat) => (
-        <Chat {...chat} />
-      ))}
-      {/* <Chat /> */}
+      {chats.length > 0 && chats.map((chat) => <Chat {...chat} />)}
+
+      {chats.length === 0 && (
+        <p>
+          You don't have any recent chats. Search for users to start a
+          conversation.
+        </p>
+      )}
     </div>
   );
 };

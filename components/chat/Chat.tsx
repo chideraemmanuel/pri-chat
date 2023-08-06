@@ -20,25 +20,29 @@ const Chat: React.FC<Props> = ({
   const { data: sender } = useGetUser(senderUid);
 
   return (
-    <div className={styles.chat}>
-      <div className={styles.chat__info}>
-        <div className={styles.chat__info_image}>
-          <Image src={sender?.profileImage ?? profileImage} alt="" />
-        </div>
-        <div className={styles.chat__info_content}>
-          <h3>
-            {sender?.firstName} {sender?.lastName}
-          </h3>
-          {/* <p>What's up?</p> */}
-          {text && <p>{text}</p>}
-        </div>
-      </div>
+    <>
+      {sender && (
+        <div className={styles.chat}>
+          <div className={styles.chat__info}>
+            <div className={styles.chat__info_image}>
+              <Image src={sender?.profileImage ?? profileImage} alt="" />
+            </div>
+            <div className={styles.chat__info_content}>
+              <h3>
+                {sender?.firstName} {sender?.lastName}
+              </h3>
+              {/* <p>What's up?</p> */}
+              {text && <p>{text}</p>}
+            </div>
+          </div>
 
-      <div className={styles.chat__tag}>
-        <span className={styles.chat__tag_time}>9:37 PM</span>
-        <div className={styles.chat__tag_unread}></div>
-      </div>
-    </div>
+          <div className={styles.chat__tag}>
+            <span className={styles.chat__tag_time}>9:37 PM</span>
+            <div className={styles.chat__tag_unread}></div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
