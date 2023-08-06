@@ -56,8 +56,9 @@ const signUp = async (credentials: UserTypes) => {
   const data = {
     // id: uid,
     uid,
-    firstName,
-    lastName,
+    firstName: firstName.toLocaleLowerCase(),
+    lastName: lastName.toLocaleLowerCase(),
+    email: email.toLocaleLowerCase(),
     // displayName
     // displayPicture: null,
     profileImage: null,

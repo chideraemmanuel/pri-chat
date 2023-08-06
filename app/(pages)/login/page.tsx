@@ -85,7 +85,9 @@ const LoginPage: React.FC = () => {
                 setValue={setLoginPassword}
               />
 
-              <button>Login</button>
+              <button disabled={isLoggingIn}>
+                {isLoggingIn ? "Signing in..." : "Login"}
+              </button>
             </form>
 
             <p>

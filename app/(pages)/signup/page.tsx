@@ -39,13 +39,6 @@ const SignUp: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // useSignUp({
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   password,
-    // });
-
     signUp({
       firstName,
       lastName,
@@ -53,30 +46,6 @@ const SignUp: React.FC = () => {
       password,
     });
   };
-
-  // if (auth.currentUser) {
-  //   router.replace("/");
-  //   return;
-  // }
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     dispatch(
-  //       setCurrentUser({
-  //         isLoading: false,
-  //         active: true,
-  //       })
-  //     );
-  //     router.replace("/");
-  //   } else if (!user) {
-  //     dispatch(
-  //       setCurrentUser({
-  //         isLoading: false,
-  //         active: false,
-  //       })
-  //     );
-  //   }
-  // });
 
   return (
     <>
@@ -121,7 +90,9 @@ const SignUp: React.FC = () => {
               />
 
               {/* <button>Sign up</button> */}
-              <button>{isSigningUp ? "Creating account..." : "Sign up"}</button>
+              <button disabled={isSigningUp}>
+                {isSigningUp ? "Creating account..." : "Sign up"}
+              </button>
             </form>
 
             <p>

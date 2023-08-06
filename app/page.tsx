@@ -16,6 +16,7 @@ import { useGetUser } from "@/hooks/useGetUser";
 import { openSearchBar } from "@/redux/slices/navigationSlice";
 import SearchBar from "@/components/searchBar/SearchBar";
 import SearchResults from "@/containers/searchResults/SearchResults";
+import { setActiveChat } from "@/redux/slices/chatsSlice";
 
 const Homepage: React.FC = () => {
   const { isLoading, active } = useSelector(
@@ -25,6 +26,8 @@ const Homepage: React.FC = () => {
   const { searchBarActive } = useSelector(
     (store: StoreTypes) => store.navigation
   );
+
+  const { activeChat } = useSelector((store: StoreTypes) => store.chat);
 
   const dispatch = useDispatch();
 
@@ -52,7 +55,7 @@ const Homepage: React.FC = () => {
                       <FiSearch />
                     </button>
 
-                    <button>
+                    <button onClick={() => dispatch(setActiveChat("okay"))}>
                       <Image src={user?.profileImage ?? profileImage} alt="" />
                     </button>
                   </div>
@@ -66,49 +69,20 @@ const Homepage: React.FC = () => {
               {searchBarActive && <SearchBar />}
             </div>
 
-            {!searchBarActive && <Chats uid="1" />}
+            {!searchBarActive && !activeChat && <Chats uid="1" />}
 
             {searchBarActive && <SearchResults />}
           </div>
-          <div className={styles.homepage__right}>
-            <div className={styles.homepage__right_head}>
-              <div>
-                <button>
-                  <Image src={profileImage} alt="" />
-                </button>
 
-                <div>
-                  <h3>Sender's name</h3>
-                  <span>Online</span>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.homepage__right_convo}>
-              {/* <ConversationBox /> */}
-            </div>
-
-            {/* <div className={styles.homepage__right_input}>
-          <div>
-            <textarea
-            name="message"
-              id=""
-              //   cols="30"
-              //   rows="10"
-              //   onClick={() => console.log("hello")}
-              placeholder="Message"
-              />
-              
-            <input type="file" name="" id="attachment" />
-            <label htmlFor="attachment">
-              <FiImage />
-              </label>
-              </div>
-
-              <div>
-              <FiSend />
-              </div>
-            </div> */}
+          {/* <div className={styles.homepage__convo}> */}
+          <div
+            className={
+              !activeChat
+                ? styles.homepage__convo
+                : styles.homepage__convoActive
+            }
+          >
+            <ConversationBox />
           </div>
         </main>
       )}

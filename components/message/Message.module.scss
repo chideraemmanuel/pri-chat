@@ -23,6 +23,7 @@
   border-radius: 7px 0 0 7px;
 
   p {
+    font-size: var(--sm-font);
     word-break: break-all;
     flex: 1;
   }
@@ -58,6 +59,7 @@
   border-radius: 0 7px 7px 0;
 
   p {
+    font-size: var(--sm-font);
     // word-break: break-all;
     word-break: normal;
     flex: 1;

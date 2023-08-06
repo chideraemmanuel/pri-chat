@@ -2,6 +2,8 @@ import Image from "next/image";
 import styles from "./Chat.module.scss";
 import profileImage from "@/assets/profile.jpg";
 import { useGetUser } from "@/hooks/useGetUser";
+import { useDispatch } from "react-redux";
+import { setActiveChat } from "@/redux/slices/chatsSlice";
 
 interface Props {
   senderUid: string;
@@ -19,10 +21,23 @@ const Chat: React.FC<Props> = ({
 }) => {
   const { data: sender } = useGetUser(senderUid);
 
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(
+      setActiveChat({
+        senderUid,
+        senderFirstName: sender?.firstName,
+        senderLastName: sender?.lastName,
+        senderProfileImage: sender?.profileImage,
+      })
+    );
+  };
+
   return (
     <>
       {sender && (
-        <div className={styles.chat}>
+        <div className={styles.chat} onClick={handleClick}>
           <div className={styles.chat__info}>
             <div className={styles.chat__info_image}>
               <Image src={sender?.profileImage ?? profileImage} alt="" />
