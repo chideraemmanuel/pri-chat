@@ -8,11 +8,13 @@ export interface ChatsStateTypes {
     senderLastName: string;
     senderProfileImage: string;
   } | null;
+  message: string;
 }
 
 const initialState: ChatsStateTypes = {
   chats: [],
   activeChat: null,
+  message: "",
 };
 
 const chatSlice = createSlice({
@@ -38,9 +40,13 @@ const chatSlice = createSlice({
     closeActiveChat: (state: ChatsStateTypes) => {
       state.activeChat = null;
     },
+    setMessage: (state: ChatsStateTypes, action) => {
+      state.message = action.payload;
+    },
   },
 });
 
-export const { setChats, setActiveChat, closeActiveChat } = chatSlice.actions;
+export const { setChats, setActiveChat, closeActiveChat, setMessage } =
+  chatSlice.actions;
 
 export default chatSlice.reducer;

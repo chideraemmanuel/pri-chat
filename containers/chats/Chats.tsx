@@ -10,11 +10,7 @@ import { setChats } from "@/redux/slices/chatsSlice";
 import { StoreTypes } from "@/redux/store";
 import { useGetChats } from "@/hooks/useGetChats";
 
-interface Props {
-  uid: string;
-}
-
-const Chats: React.FC<Props> = ({ uid }) => {
+const Chats: React.FC = () => {
   // const { chats } = useSelector((store: StoreTypes) => store.chat);
 
   const dispatch = useDispatch();
@@ -24,8 +20,8 @@ const Chats: React.FC<Props> = ({ uid }) => {
   const chats: any[] | [] = [
     // {
     //   senderUid: "",
-    //   createdAt: "",
     //   latestMessage: {
+    //   sentAt: "",
     //     text: "Hey there!",
     //     image: null,
     //   },
@@ -34,9 +30,9 @@ const Chats: React.FC<Props> = ({ uid }) => {
 
   return (
     <div className={styles.chats}>
-      {chats.length > 0 && chats.map((chat) => <Chat {...chat} />)}
+      {data.length > 0 && data.map((chat) => <Chat {...chat} />)}
 
-      {chats.length === 0 && (
+      {data.length === 0 && (
         <p>
           You don't have any recent chats. Search for users to start a
           conversation.

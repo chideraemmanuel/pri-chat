@@ -69,7 +69,13 @@ const Homepage: React.FC = () => {
               {searchBarActive && <SearchBar />}
             </div>
 
-            {!searchBarActive && !activeChat && <Chats uid="1" />}
+            {/* {!searchBarActive && !activeChat && <Chats uid="1" />} */}
+
+            {!searchBarActive && (
+              <div className={activeChat ? styles.homepage__left_chats : ""}>
+                <Chats />
+              </div>
+            )}
 
             {searchBarActive && <SearchResults />}
           </div>

@@ -46,8 +46,17 @@ import { useQuery } from "react-query";
 //   return useQuery(["get chats", auth.currentUser?.uid], getChats);
 // };
 
+interface ChatTypes {
+  senderUid: string;
+  latestMessage: {
+    sentAt: string;
+    text: null | string;
+    image: null | string;
+  };
+}
+
 export const useGetChats = () => {
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<ChatTypes[]>([]);
 
   useEffect(() => {
     const chatsReference = collection(

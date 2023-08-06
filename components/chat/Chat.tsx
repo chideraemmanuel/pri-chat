@@ -7,17 +7,16 @@ import { setActiveChat } from "@/redux/slices/chatsSlice";
 
 interface Props {
   senderUid: string;
-  createdAt: string;
   latestMessage: {
-    text: string;
+    sentAt: string;
+    text: null | string;
     image: null | string;
   };
 }
 
 const Chat: React.FC<Props> = ({
   senderUid,
-  createdAt,
-  latestMessage: { text, image },
+  latestMessage: { text, image, sentAt },
 }) => {
   const { data: sender } = useGetUser(senderUid);
 

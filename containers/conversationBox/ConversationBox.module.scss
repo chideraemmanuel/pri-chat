@@ -158,7 +158,7 @@
     align-items: center;
     gap: max(0.7vw, 10px);
 
-    > div:first-child {
+    &_textarea {
       position: relative;
       flex: 1;
 
@@ -237,7 +237,8 @@
       }
     }
 
-    > div:last-child {
+    &_sendBtn {
+      border: none;
       font-size: var(--md-font);
       background-color: var(--primary-color);
       padding: max(0.7vh, 10px) max(0.7vw, 10px);
