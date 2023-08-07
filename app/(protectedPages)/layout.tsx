@@ -6,6 +6,7 @@ import AuthContainer from "@/containers/authContainer/AuthContainer";
 import ReactQueryProvider from "@/containers/ReactQueryProvider";
 import ConversationBox from "@/containers/conversationBox/ConversationBox";
 import Navbar from "@/containers/navbar/Navbar";
+import BottomNavigation from "@/containers/bottomNavigation/BottomNavigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function ProtectedPagesLayout({
                 <div className="main">
                   <Navbar />
                   {children}
+                  <BottomNavigation />
                 </div>
 
                 <ConversationBox />

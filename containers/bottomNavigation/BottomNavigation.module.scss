@@ -1,0 +1,30 @@
+.bottomNavigation {
+  //   background-color: red;
+  background: var(--nav-bg);
+  backdrop-filter: var(--nav-bg-blur);
+  //   position: fixed;
+  bottom: 0;
+  left: 0;
+  //   right: 0;
+  width: 100%;
+  padding: max(0.7vh, 15px) max(0.7vw, 15px);
+  border-top: 1px solid var(--gray-100);
+
+  display: flex;
+  align-items: center;
+  //   justify-content: space-around;
+  z-index: 5;
+
+  a {
+    flex: 1;
+    text-align: center;
+    display: block;
+    font-size: var(--lg-font);
+    color: var(--gray-500);
+    transition: 0.2s ease;
+
+    &:hover {
+      color: var(--primary-text-color);
+    }
+  }
+}

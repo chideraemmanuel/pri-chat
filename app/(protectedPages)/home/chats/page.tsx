@@ -44,7 +44,7 @@ const ChatsPage: React.FC = () => {
     <div className={styles.chatsPage}>
       <Chats />
 
-      <FindUsersToggle />
+      {/* <FindUsersToggle /> */}
     </div>
   );
 };

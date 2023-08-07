@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setChats } from "@/redux/slices/chatsSlice";
 import { StoreTypes } from "@/redux/store";
 import { useGetChats } from "@/hooks/useGetChats";
+import { FaUserPlus } from "react-icons/fa";
 
 const Chats: React.FC = () => {
   // const { chats } = useSelector((store: StoreTypes) => store.chat);
@@ -35,8 +36,11 @@ const Chats: React.FC = () => {
 
       {data.length === 0 && (
         <p>
-          You don't have any recent chats. Search for users to start a
-          conversation.
+          You don't have any recent chats. Click on{" "}
+          <span>
+            <FaUserPlus />
+          </span>{" "}
+          to find users and start a conversation.
         </p>
       )}
     </div>

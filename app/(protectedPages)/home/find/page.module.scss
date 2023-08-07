@@ -1,2 +1,14 @@
 .findUsersPage {
+  display: flex;
+  flex-direction: column;
+  gap: max(1vh, 20px);
+  padding: 0 15px;
+  padding-top: 15px;
+
+  > span {
+    display: block;
+    // text-align: center;
+    font-size: var(--base-font);
+    color: var(--gray-700);
+  }
 }
