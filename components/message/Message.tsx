@@ -4,8 +4,7 @@ import styles from "./Message.module.scss";
 interface Props {
   type: "received" | "sent";
   message: {
-    //   sentAt: Timestamp;
-    sentAt: FieldValue;
+    // sentAt: FieldValue;
     senderUid: string;
     receiverUid: string;
     content: {

@@ -25,10 +25,10 @@ const Chat: React.FC<Props> = ({
   const handleClick = () => {
     dispatch(
       setActiveChat({
-        senderUid,
-        senderFirstName: sender?.firstName,
-        senderLastName: sender?.lastName,
-        senderProfileImage: sender?.profileImage,
+        receiverUid: senderUid,
+        receiverFirstName: sender?.firstName,
+        receiverLastName: sender?.lastName,
+        receiverProfileImage: sender?.profileImage,
       })
     );
   };

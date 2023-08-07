@@ -21,7 +21,7 @@ const SearchResults: React.FC = () => {
 
       <div>
         {users?.map((user) => (
-          <SearchResult name="Chidera Emmanuel" profileImage={null} />
+          <SearchResult {...user} />
         ))}
       </div>
     </div>

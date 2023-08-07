@@ -26,7 +26,10 @@ const ConversationBox: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const conversation = useGetConversation(activeChat?.senderUid);
+  const conversation = useGetConversation(activeChat?.receiverUid);
+
+  // console.log(conversation);
+  console.log(conversation);
 
   const { mutate: sendMessage } = useSendMessage();
 
@@ -41,7 +44,7 @@ const ConversationBox: React.FC = () => {
       // @ts-ignore
       senderUid: auth.currentUser?.uid,
       // @ts-ignore
-      receiverUid: activeChat?.senderUid,
+      receiverUid: activeChat?.receiverUid,
       content: {
         text: message,
         image: null,
@@ -53,29 +56,31 @@ const ConversationBox: React.FC = () => {
 
   return (
     <>
-      {activeChat && (
-        <div className={styles.conversationBox}>
-          <div className={styles.conversationBox__header}>
-            <div className={styles.conversationBox__header_chatInfo}>
-              <button onClick={() => dispatch(closeActiveChat())}>
-                <FiArrowLeft />
-              </button>
-
-              <button>
-                <Image src={profileImage} alt="" />
-              </button>
-
-              <div>
-                <h3>Sender's name</h3>
-                <span>Online</span>
-              </div>
-            </div>
-
+      {/* {activeChat && ( */}
+      <div className={styles.conversationBox}>
+        <div className={styles.conversationBox__header}>
+          <div className={styles.conversationBox__header_chatInfo}>
             <button onClick={() => dispatch(closeActiveChat())}>
-              <FiX />
+              <FiArrowLeft />
             </button>
+
+            <button>
+              <Image src={profileImage} alt="" />
+            </button>
+
+            <div>
+              <h3>
+                {activeChat?.receiverFirstName} {activeChat?.receiverLastName}
+              </h3>
+              <span>Online</span>
+            </div>
           </div>
-          {/* 
+
+          <button onClick={() => dispatch(closeActiveChat())}>
+            <FiX />
+          </button>
+        </div>
+        {/* 
           <div className={styles.conversationBox__messages}>
             <Message type="received" text="Hi" />
             <Message type="sent" text="Hello" />
@@ -83,8 +88,9 @@ const ConversationBox: React.FC = () => {
             <Message type="received" text="And how is your day unfolding?" />
           </div> */}
 
-          <div className={styles.conversationBox__messages}>
-            {conversation.map((message) => (
+        <div className={styles.conversationBox__messages}>
+          {conversation.length > 0 &&
+            conversation[0].messages.map((message) => (
               <Message
                 type={
                   auth.currentUser?.uid === message.senderUid
@@ -94,36 +100,36 @@ const ConversationBox: React.FC = () => {
                 message={message}
               />
             ))}
-          </div>
-
-          <div className={styles.conversationBox__input}>
-            <div className={styles.conversationBox__input_textarea}>
-              <textarea
-                name="message"
-                id=""
-                //   cols="30"
-                //   rows="10"
-                //   onClick={() => console.log("hello")}
-                value={message}
-                onChange={(e) => dispatch(setMessage(e.target.value))}
-                placeholder="Message"
-              />
-
-              <input type="file" name="" id="attachment" />
-              <label htmlFor="attachment">
-                <FiImage />
-              </label>
-            </div>
-
-            <button
-              className={styles.conversationBox__input_sendBtn}
-              onClick={handleSend}
-            >
-              <FiSend />
-            </button>
-          </div>
         </div>
-      )}
+
+        <div className={styles.conversationBox__input}>
+          <div className={styles.conversationBox__input_textarea}>
+            <textarea
+              name="message"
+              id=""
+              //   cols="30"
+              //   rows="10"
+              //   onClick={() => console.log("hello")}
+              value={message}
+              onChange={(e) => dispatch(setMessage(e.target.value))}
+              placeholder="Message"
+            />
+
+            <input type="file" name="" id="attachment" />
+            <label htmlFor="attachment">
+              <FiImage />
+            </label>
+          </div>
+
+          <button
+            className={styles.conversationBox__input_sendBtn}
+            onClick={handleSend}
+          >
+            <FiSend />
+          </button>
+        </div>
+      </div>
+      {/* )} */}
     </>
   );
 };

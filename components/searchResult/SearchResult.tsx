@@ -1,19 +1,48 @@
 import Image from "next/image";
 import styles from "./SearchResult.module.scss";
 import profileImageAlt from "@/assets/profile.jpg";
+import { useDispatch } from "react-redux";
+import { setActiveChat } from "@/redux/slices/chatsSlice";
+import { closeSearchBar } from "@/redux/slices/navigationSlice";
 
 interface Props {
-  profileImage: string | null;
-  name: string;
+  // id: string;
+  uid: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profileImage: null;
 }
 
-const SearchResult: React.FC<Props> = ({ profileImage, name }) => {
+const SearchResult: React.FC<Props> = ({
+  uid,
+  profileImage,
+  firstName,
+  lastName,
+}) => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(
+      setActiveChat({
+        receiverUid: uid,
+        receiverFirstName: firstName,
+        receiverLastName: lastName,
+        receiverProfileImage: profileImage,
+      })
+    );
+
+    dispatch(closeSearchBar());
+  };
+
   return (
-    <div className={styles.searchResult}>
+    <div className={styles.searchResult} onClick={handleClick}>
       <div className={styles.searchResult__image}>
         <Image src={profileImage ?? profileImageAlt} alt="" />
       </div>
-      <span>{name}</span>
+      <span>
+        {firstName} {lastName}
+      </span>
     </div>
   );
 };

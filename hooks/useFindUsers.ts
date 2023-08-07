@@ -2,6 +2,14 @@ import { db } from "@/config/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useQuery } from "react-query";
 
+interface UserTypes {
+  uid: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profileImage: null;
+}
+
 const findUsers = async ({ queryKey }: { queryKey: any[] }) => {
   const keyword = queryKey[1];
 
@@ -11,7 +19,7 @@ const findUsers = async ({ queryKey }: { queryKey: any[] }) => {
 
   const response = await getDocs(q);
 
-  const result = response.docs.map((item) => {
+  const result: UserTypes[] = response.docs.map((item) => {
     return { ...item.data(), id: item.id };
   });
 

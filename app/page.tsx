@@ -34,6 +34,8 @@ const Homepage: React.FC = () => {
   const router = useRouter();
 
   const { data: user } = useGetUser(auth.currentUser?.uid);
+  console.log("user", user);
+  console.log(auth.currentUser);
 
   // signOut(auth);
 

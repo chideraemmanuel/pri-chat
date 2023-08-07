@@ -3,10 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface ChatsStateTypes {
   chats: any[];
   activeChat: {
-    senderUid: string;
-    senderFirstName: string;
-    senderLastName: string;
-    senderProfileImage: string;
+    receiverUid: string;
+    receiverFirstName: string;
+    receiverLastName: string;
+    receiverProfileImage: string | null;
   } | null;
   message: string;
 }
@@ -28,10 +28,10 @@ const chatSlice = createSlice({
       state: ChatsStateTypes,
       action: {
         payload: {
-          senderUid: string;
-          senderFirstName: string;
-          senderLastName: string;
-          senderProfileImage: string;
+          receiverUid: string;
+          receiverFirstName: string;
+          receiverLastName: string;
+          receiverProfileImage: string | null;
         };
       }
     ) => {

@@ -27,6 +27,14 @@ import { useQuery } from "react-query";
 //   return { ...response.data(), id: response.id };
 // };
 
+interface UserTypes {
+  uid: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profileImage: null;
+}
+
 const getUser = async ({ queryKey }: { queryKey: any[] }) => {
   const uid = queryKey[1];
 
@@ -35,9 +43,12 @@ const getUser = async ({ queryKey }: { queryKey: any[] }) => {
 
   const response = await getDoc(userReference);
 
+  // const result: UserTypes = { ...response.data(), id: response.id };
+  const result: UserTypes = { ...response.data() };
+
   // console.log("User", response);
   //   console.log("User", { ...response.data(), id: response.id });
-  return { ...response.data(), id: response.id };
+  return result;
 };
 
 export const useGetUser = (uid: string) => {

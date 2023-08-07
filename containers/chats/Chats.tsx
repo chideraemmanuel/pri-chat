@@ -16,6 +16,7 @@ const Chats: React.FC = () => {
   const dispatch = useDispatch();
 
   const data = useGetChats();
+  console.log(data);
 
   const chats: any[] | [] = [
     // {
@@ -30,7 +31,7 @@ const Chats: React.FC = () => {
 
   return (
     <div className={styles.chats}>
-      {data.length > 0 && data.map((chat) => <Chat {...chat} />)}
+      {data && data.length > 0 && data.map((chat) => <Chat {...chat} />)}
 
       {data.length === 0 && (
         <p>

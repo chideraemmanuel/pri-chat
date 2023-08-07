@@ -3,7 +3,6 @@ import { FieldValue, collection, doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 interface MessageTypes {
-  //   sentAt: Timestamp;
   sentAt: FieldValue;
   senderUid: string;
   receiverUid: string;
@@ -13,14 +12,24 @@ interface MessageTypes {
   };
 }
 
+interface ResultTypes {
+  messages: MessageTypes[];
+}
+
 export const useGetConversation = (receiverUid: string) => {
-  const [conversation, setConversation] = useState<MessageTypes[]>([]);
+  const [conversation, setConversation] = useState<ResultTypes[]>([]);
+
+  console.log(receiverUid);
 
   useEffect(() => {
     // const chatsReference = doc(db, `users/${auth.currentUser?.uid}/chats/${receiverUid}/fullConversation`, docId);
 
     const conversationReference = collection(
       db,
+      `users/${auth.currentUser?.uid}/chats/${receiverUid}/fullConversation`
+    );
+
+    console.log(
       `users/${auth.currentUser?.uid}/chats/${receiverUid}/fullConversation`
     );
 
@@ -42,7 +51,7 @@ export const useGetConversation = (receiverUid: string) => {
     };
 
     auth.currentUser?.uid && getConversation();
-  }, []);
+  }, [receiverUid]);
 
   return conversation;
 };
