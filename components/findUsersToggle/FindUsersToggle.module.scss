@@ -1,0 +1,16 @@
+.findUserToggle {
+  position: absolute;
+  bottom: min(10%, 50px);
+  right: max(1vw, 20px);
+  z-index: 5;
+
+  button {
+    border: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: var(--lg-font);
+    cursor: pointer;
+  }
+}

@@ -1,3 +1,27 @@
+.conversationBoxContainer {
+  background: var(--chat-box-gradient);
+  z-index: 5;
+
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    inset: 0;
+    transform: translateX(100%);
+    transition: 0.3s ease;
+  }
+}
+
+.conversationBoxContainerActive {
+  background: var(--chat-box-gradient);
+  z-index: 5;
+
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    inset: 0;
+    transform: translateX(0);
+    transition: 0.3s ease;
+  }
+}
+
 .conversationBox {
   padding-bottom: clamp(15px, 2vw, 24px);
   position: relative !important;

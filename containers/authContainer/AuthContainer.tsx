@@ -2,10 +2,11 @@
 
 import { auth } from "@/config/firebase";
 import { setCurrentUser } from "@/redux/slices/authSlice";
+import { StoreTypes } from "@/redux/store";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AuthContainer = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
         })
       );
       //   router.replace("/");
-      router.push("/");
+      router.push("/home/chats");
     } else if (!user) {
       dispatch(
         setCurrentUser({
@@ -34,7 +35,11 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
     }
   });
 
-  return <>{children}</>;
+  const { isLoading, active } = useSelector(
+    (store: StoreTypes) => store.auth.currentUser
+  );
+
+  return <>{!isLoading && active && <div>{children}</div>}</>;
 };
 
 export default AuthContainer;

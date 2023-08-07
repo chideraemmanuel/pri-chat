@@ -1,5 +1,5 @@
 import ReduxProvider from "@/redux/ReduxProvider";
-import "./globals.scss";
+import "../globals.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import AuthContainer from "@/containers/authContainer/AuthContainer";
@@ -24,16 +24,7 @@ export default function RootLayout({
       <ReduxProvider>
         <ReactQueryProvider>
           <body className={inter.className}>
-            <AuthContainer>
-              <main>
-                <div className="main">
-                  <Navbar />
-                  {children}
-                </div>
-
-                <ConversationBox />
-              </main>
-            </AuthContainer>
+            <AuthContainer>{children}</AuthContainer>
           </body>
         </ReactQueryProvider>
       </ReduxProvider>

@@ -1,3 +1,5 @@
+"use client";
+
 import Message from "@/components/message/Message";
 import styles from "./ConversationBox.module.scss";
 import {
@@ -55,32 +57,38 @@ const ConversationBox: React.FC = () => {
   };
 
   return (
-    <>
-      {/* {activeChat && ( */}
-      <div className={styles.conversationBox}>
-        <div className={styles.conversationBox__header}>
-          <div className={styles.conversationBox__header_chatInfo}>
-            <button onClick={() => dispatch(closeActiveChat())}>
-              <FiArrowLeft />
-            </button>
+    <div
+      className={
+        !activeChat
+          ? styles.conversationBoxContainer
+          : styles.conversationBoxContainerActive
+      }
+    >
+      {activeChat && (
+        <div className={styles.conversationBox}>
+          <div className={styles.conversationBox__header}>
+            <div className={styles.conversationBox__header_chatInfo}>
+              <button onClick={() => dispatch(closeActiveChat())}>
+                <FiArrowLeft />
+              </button>
 
-            <button>
-              <Image src={profileImage} alt="" />
-            </button>
+              <button>
+                <Image src={profileImage} alt="" />
+              </button>
 
-            <div>
-              <h3>
-                {activeChat?.receiverFirstName} {activeChat?.receiverLastName}
-              </h3>
-              <span>Online</span>
+              <div>
+                <h3>
+                  {activeChat?.receiverFirstName} {activeChat?.receiverLastName}
+                </h3>
+                <span>Online</span>
+              </div>
             </div>
-          </div>
 
-          <button onClick={() => dispatch(closeActiveChat())}>
-            <FiX />
-          </button>
-        </div>
-        {/* 
+            <button onClick={() => dispatch(closeActiveChat())}>
+              <FiX />
+            </button>
+          </div>
+          {/* 
           <div className={styles.conversationBox__messages}>
             <Message type="received" text="Hi" />
             <Message type="sent" text="Hello" />
@@ -88,49 +96,49 @@ const ConversationBox: React.FC = () => {
             <Message type="received" text="And how is your day unfolding?" />
           </div> */}
 
-        <div className={styles.conversationBox__messages}>
-          {conversation.length > 0 &&
-            conversation[0].messages.map((message) => (
-              <Message
-                type={
-                  auth.currentUser?.uid === message.senderUid
-                    ? "sent"
-                    : "received"
-                }
-                message={message}
-              />
-            ))}
-        </div>
-
-        <div className={styles.conversationBox__input}>
-          <div className={styles.conversationBox__input_textarea}>
-            <textarea
-              name="message"
-              id=""
-              //   cols="30"
-              //   rows="10"
-              //   onClick={() => console.log("hello")}
-              value={message}
-              onChange={(e) => dispatch(setMessage(e.target.value))}
-              placeholder="Message"
-            />
-
-            <input type="file" name="" id="attachment" />
-            <label htmlFor="attachment">
-              <FiImage />
-            </label>
+          <div className={styles.conversationBox__messages}>
+            {conversation.length > 0 &&
+              conversation[0].messages.map((message) => (
+                <Message
+                  type={
+                    auth.currentUser?.uid === message.senderUid
+                      ? "sent"
+                      : "received"
+                  }
+                  message={message}
+                />
+              ))}
           </div>
 
-          <button
-            className={styles.conversationBox__input_sendBtn}
-            onClick={handleSend}
-          >
-            <FiSend />
-          </button>
+          <div className={styles.conversationBox__input}>
+            <div className={styles.conversationBox__input_textarea}>
+              <textarea
+                name="message"
+                id=""
+                //   cols="30"
+                //   rows="10"
+                //   onClick={() => console.log("hello")}
+                value={message}
+                onChange={(e) => dispatch(setMessage(e.target.value))}
+                placeholder="Message"
+              />
+
+              <input type="file" name="" id="attachment" />
+              <label htmlFor="attachment">
+                <FiImage />
+              </label>
+            </div>
+
+            <button
+              className={styles.conversationBox__input_sendBtn}
+              onClick={handleSend}
+            >
+              <FiSend />
+            </button>
+          </div>
         </div>
-      </div>
-      {/* )} */}
-    </>
+      )}
+    </div>
   );
 };
 
