@@ -1,4 +1,4 @@
-import { db } from "@/config/firebase";
+import { auth, db } from "@/config/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useQuery } from "react-query";
 
@@ -23,7 +23,11 @@ const findUsers = async ({ queryKey }: { queryKey: any[] }) => {
     return { ...item.data(), id: item.id };
   });
 
-  return result;
+  const filteredResult = result.filter(
+    (user) => user.uid !== auth.currentUser?.uid
+  );
+
+  return filteredResult;
 };
 
 export const useFindUsers = (keyword: string) => {

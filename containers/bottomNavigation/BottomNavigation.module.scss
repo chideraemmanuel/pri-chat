@@ -27,4 +27,12 @@
       color: var(--primary-text-color);
     }
   }
+
+  a:first-child {
+    border-right: 1px solid var(--gray-100);
+  }
+
+  a:last-child {
+    border-left: 1px solid var(--gray-100);
+  }
 }

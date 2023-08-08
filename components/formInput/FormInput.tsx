@@ -29,17 +29,13 @@ const FormInput: React.FC<Props> = ({ type, placeholder, value, setValue }) => {
 
   return (
     <div className={styles.formInput}>
-      {/* <label>Form Input!</label> */}
       <div className={styles.formInput__input}>
         <input
           type={type === "password" ? passwordCurrentType : type}
-          // value={input}
-          // onChange={(e) => setInput(e.target.value)}
           value={value}
           onChange={(e) => dispatch(setValue(e.target.value))}
           className={value.length > 0 ? styles.formInput__input_valid : ""}
         />
-        {/* <input type={type} placeholder={placeholder} /> */}
         <span>{placeholder}</span>
 
         {type === "password" && (
@@ -51,6 +47,8 @@ const FormInput: React.FC<Props> = ({ type, placeholder, value, setValue }) => {
           </div>
         )}
       </div>
+
+      <span className={styles.formInput__error}>Error here!</span>
     </div>
   );
 };

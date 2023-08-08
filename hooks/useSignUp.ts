@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { useState } from "react";
 import { useMutation } from "react-query";
 
 interface UserTypes {
@@ -13,7 +14,7 @@ interface UserTypes {
   password: string;
 }
 
-// export const useSignUp = async (credentials: UserTypes) => {
+// const signUp = async (credentials: UserTypes) => {
 //   const { firstName, lastName, email, password } = credentials;
 
 //   const createdUser = await createUserWithEmailAndPassword(
@@ -22,17 +23,15 @@ interface UserTypes {
 //     password
 //   );
 
-//   // const usersCollectionReference = collection(db, 'users')
-//   // const usersDocumentReference = doc(db, 'users', auth.currentUser?.uid)
-
 //   const { uid } = createdUser.user;
 //   const usersDocumentReference = doc(db, "users", uid);
 
 //   const data = {
 //     // id: uid,
 //     uid,
-//     firstName,
-//     lastName,
+//     firstName: firstName.toLocaleLowerCase(),
+//     lastName: lastName.toLocaleLowerCase(),
+//     email: email.toLocaleLowerCase(),
 //     // displayName
 //     // displayPicture: null,
 //     profileImage: null,
@@ -41,32 +40,47 @@ interface UserTypes {
 //   await setDoc(usersDocumentReference, data, { merge: true });
 // };
 
-const signUp = async (credentials: UserTypes) => {
-  const { firstName, lastName, email, password } = credentials;
-
-  const createdUser = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-
-  const { uid } = createdUser.user;
-  const usersDocumentReference = doc(db, "users", uid);
-
-  const data = {
-    // id: uid,
-    uid,
-    firstName: firstName.toLocaleLowerCase(),
-    lastName: lastName.toLocaleLowerCase(),
-    email: email.toLocaleLowerCase(),
-    // displayName
-    // displayPicture: null,
-    profileImage: null,
-  };
-
-  await setDoc(usersDocumentReference, data, { merge: true });
-};
+// export const useSignUp = () => {
+//   return useMutation(["sign up"], signUp);
+// };
 
 export const useSignUp = () => {
-  return useMutation(["sign up"], signUp);
+  // const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<null | string | any>(null);
+
+  const mutate = async (credentials: UserTypes) => {
+    const { firstName, lastName, email, password } = credentials;
+
+    try {
+      const createdUser = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const { uid } = createdUser.user;
+      const userDocumentReference = doc(db, "users", uid);
+
+      const data = {
+        // id: uid,
+        uid,
+        firstName: firstName.toLocaleLowerCase(),
+        lastName: lastName.toLocaleLowerCase(),
+        email: email.toLocaleLowerCase(),
+        // displayName
+        // displayPicture: null,
+        profileImage: null,
+      };
+
+      await setDoc(userDocumentReference, data, { merge: true });
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setError(error);
+    }
+  };
+
+  return { mutate, isLoading, error };
 };

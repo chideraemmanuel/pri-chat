@@ -18,6 +18,7 @@ import SearchBar from "@/components/searchBar/SearchBar";
 import SearchResults from "@/containers/searchResults/SearchResults";
 import { setActiveChat } from "@/redux/slices/chatsSlice";
 import FindUsersToggle from "@/components/findUsersToggle/FindUsersToggle";
+import FullScreenLoader from "@/components/fullScreenLoader/FullScreenLoader";
 
 const ChatsPage: React.FC = () => {
   const { isLoading, active } = useSelector(
@@ -45,6 +46,7 @@ const ChatsPage: React.FC = () => {
       <Chats />
 
       {/* <FindUsersToggle /> */}
+      {/* <FullScreenLoader /> */}
     </div>
   );
 };

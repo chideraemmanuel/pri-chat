@@ -46,8 +46,8 @@
     form {
       display: flex;
       flex-direction: column;
-      //   gap: max(2vw, 15px);
-      gap: clamp(15px, 2vw, 24px);
+      gap: max(2vh, 20px);
+      // gap: clamp(15px, 2vw, 24px);
 
       button {
         background-color: var(--primary-color);

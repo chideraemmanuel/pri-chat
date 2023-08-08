@@ -1,5 +1,6 @@
 "use client";
 
+import FullScreenLoader from "@/components/fullScreenLoader/FullScreenLoader";
 import { auth } from "@/config/firebase";
 import { setCurrentUser } from "@/redux/slices/authSlice";
 import { StoreTypes } from "@/redux/store";
@@ -39,7 +40,9 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
     (store: StoreTypes) => store.auth.currentUser
   );
 
-  return <>{!isLoading && active && <div>{children}</div>}</>;
+  return (
+    <>{!isLoading && active ? <div>{children}</div> : <FullScreenLoader />}</>
+  );
 };
 
 export default AuthContainer;

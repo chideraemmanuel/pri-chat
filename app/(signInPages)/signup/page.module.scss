@@ -47,12 +47,13 @@
     form {
       display: flex;
       flex-direction: column;
-      //   gap: max(2vw, 15px);
-      gap: clamp(15px, 2vw, 24px);
+      gap: max(2vh, 20px);
+      // gap: clamp(20px, 2vh, 24px);
 
       > div:first-child {
         display: flex;
-        gap: clamp(15px, 2vw, 24px);
+        gap: max(2vh, 20px);
+        // gap: clamp(20px, 2vh, 24px);
 
         > * {
           flex: 1;

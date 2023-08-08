@@ -1,6 +1,9 @@
+"use client";
+
 import SearchInput from "@/components/searchInput/SearchInput";
 import styles from "./page.module.scss";
 import User from "@/components/user/User";
+import { useGetUsers } from "@/hooks/useGetUsers";
 
 const users = [
   {
@@ -76,6 +79,8 @@ const users = [
 ];
 
 const FindUsersPage: React.FC = () => {
+  // const { data: users, isLoading} = useGetUsers()
+
   return (
     <div className={styles.findUsersPage}>
       <SearchInput />
@@ -83,7 +88,7 @@ const FindUsersPage: React.FC = () => {
       <span>Find Users</span>
 
       <div className={styles.findUsersPage__users}>
-        {users.map((user) => (
+        {users?.map((user) => (
           <User {...user} key={user.uid} />
         ))}
       </div>

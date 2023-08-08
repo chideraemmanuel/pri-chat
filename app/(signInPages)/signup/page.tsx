@@ -24,7 +24,7 @@ const SignUp: React.FC = () => {
     (store: StoreTypes) => store.signIn.signUp
   );
 
-  const { isLoading, active } = useSelector(
+  const { isLoading: isAuthenticating, active: isAuthenticated } = useSelector(
     (store: StoreTypes) => store.auth.currentUser
   );
 
@@ -34,6 +34,7 @@ const SignUp: React.FC = () => {
 
   // console.log("from sign up page", auth.currentUser);
 
+  // const { mutate: signUp, isLoading: isSigningUp } = useSignUp();
   const { mutate: signUp, isLoading: isSigningUp } = useSignUp();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -49,7 +50,7 @@ const SignUp: React.FC = () => {
 
   return (
     <>
-      {!isLoading && !active && (
+      {!isAuthenticating && !isAuthenticated && (
         <div className={styles.signUpPage}>
           <div className={styles.signUpPage__form}>
             <div className={styles.signUpPage__form_header}>
