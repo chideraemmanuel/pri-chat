@@ -10,6 +10,7 @@ import { setChats } from "@/redux/slices/chatsSlice";
 import { StoreTypes } from "@/redux/store";
 import { useGetChats } from "@/hooks/useGetChats";
 import { FaUserPlus } from "react-icons/fa";
+import FormInput from "@/components/formInput/FormInput";
 
 const Chats: React.FC = () => {
   // const { chats } = useSelector((store: StoreTypes) => store.chat);
@@ -43,6 +44,14 @@ const Chats: React.FC = () => {
           to find users and start a conversation.
         </p>
       )}
+
+      {/* <FormInput
+        type="text"
+        placeholder="test"
+        value={data}
+        setValue={data}
+        error
+      /> */}
     </div>
   );
 };

@@ -39,7 +39,7 @@ const ChatsPage: React.FC = () => {
   // console.log("user", user);
   // console.log(auth.currentUser);
 
-  // signOut(auth);
+  signOut(auth);
 
   return (
     <div className={styles.chatsPage}>

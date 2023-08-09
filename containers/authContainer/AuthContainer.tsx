@@ -36,12 +36,15 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
     }
   });
 
-  const { isLoading, active } = useSelector(
+  const { isLoading: isAuthenticating, active: isAuthenticated } = useSelector(
     (store: StoreTypes) => store.auth.currentUser
   );
 
   return (
-    <>{!isLoading && active ? <div>{children}</div> : <FullScreenLoader />}</>
+    <>
+      {/* {!isAuthenticating && isAuthenticated ? ( */}
+      {!isAuthenticating ? <div>{children}</div> : <FullScreenLoader />}
+    </>
   );
 };
 

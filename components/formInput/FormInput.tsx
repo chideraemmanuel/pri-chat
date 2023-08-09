@@ -10,9 +10,16 @@ interface Props {
   placeholder: string;
   value: any;
   setValue: any;
+  error: null | string;
 }
 
-const FormInput: React.FC<Props> = ({ type, placeholder, value, setValue }) => {
+const FormInput: React.FC<Props> = ({
+  type,
+  placeholder,
+  value,
+  setValue,
+  error,
+}) => {
   const dispatch = useDispatch();
 
   const [passwordCurrentType, setPasswordCurrentType] = useState<
@@ -28,8 +35,12 @@ const FormInput: React.FC<Props> = ({ type, placeholder, value, setValue }) => {
   };
 
   return (
-    <div className={styles.formInput}>
-      <div className={styles.formInput__input}>
+    <div className={error ? styles.formInputError : styles.formInput}>
+      <div
+        className={
+          error ? styles.formInputError__input : styles.formInput__input
+        }
+      >
         <input
           type={type === "password" ? passwordCurrentType : type}
           value={value}
@@ -48,7 +59,15 @@ const FormInput: React.FC<Props> = ({ type, placeholder, value, setValue }) => {
         )}
       </div>
 
-      <span className={styles.formInput__error}>Error here!</span>
+      {error && (
+        <span
+          className={
+            error ? styles.formInputError__errorMsg : styles.formInput__errorMsg
+          }
+        >
+          {error}
+        </span>
+      )}
     </div>
   );
 };
