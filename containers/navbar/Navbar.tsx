@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useGetUser } from "@/hooks/useGetUser";
 import { auth } from "@/config/firebase";
 import profileImage from "@/assets/profile.jpg";
+import { signOut } from "firebase/auth";
 
 const Navbar: React.FC = () => {
   const { data: user } = useGetUser(auth.currentUser?.uid);
@@ -27,6 +28,7 @@ const Navbar: React.FC = () => {
         <button
           className={styles.navbar__right_profile}
           // onClick={() => dispatch(setActiveChat("okay"))}
+          onClick={() => signOut(auth)}
         >
           <Image src={user?.profileImage ?? profileImage} alt="" />
         </button>

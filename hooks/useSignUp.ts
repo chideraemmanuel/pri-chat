@@ -87,7 +87,8 @@ export const useSignUp = () => {
         profileImage: null,
       };
 
-      await setDoc(userDocumentReference, data, { merge: true });
+      // await setDoc(userDocumentReference, data, { merge: true });
+      await setDoc(userDocumentReference, data);
 
       dispatch(resetAllForms());
       setIsLoading(false);

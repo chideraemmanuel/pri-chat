@@ -65,8 +65,12 @@ export interface ChatTypes {
 
 export const useGetChats = () => {
   const [data, setData] = useState<ChatTypes[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
+
     const chatsReference = collection(
       db,
       `users/${auth.currentUser?.uid}/chats`
@@ -86,9 +90,7 @@ export const useGetChats = () => {
         });
 
         setData(result);
-        // dispatch(setChats(result));
         console.log(result);
-        // return result;
       });
 
       return () => {

@@ -11,6 +11,7 @@ import { StoreTypes } from "@/redux/store";
 import { useGetChats } from "@/hooks/useGetChats";
 import { FaUserPlus } from "react-icons/fa";
 import FormInput from "@/components/formInput/FormInput";
+import { signOut } from "firebase/auth";
 
 const Chats: React.FC = () => {
   // const { chats } = useSelector((store: StoreTypes) => store.chat);
@@ -30,6 +31,8 @@ const Chats: React.FC = () => {
     //   },
     // },
   ];
+
+  // signOut(auth);
 
   return (
     <div className={styles.chats}>
