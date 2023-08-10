@@ -76,9 +76,12 @@ export const useSignUp = () => {
       const data = {
         // id: uid,
         uid,
-        firstName: firstName.toLocaleLowerCase(),
-        lastName: lastName.toLocaleLowerCase(),
-        email: email.toLocaleLowerCase(),
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        // firstName: firstName.toLocaleLowerCase(),
+        // lastName: lastName.toLocaleLowerCase(),
+        // email: email.toLocaleLowerCase(),
         // displayName
         // displayPicture: null,
         profileImage: null,

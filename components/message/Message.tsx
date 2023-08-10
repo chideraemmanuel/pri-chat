@@ -1,10 +1,11 @@
-import { FieldValue } from "firebase/firestore";
+import { FieldValue, Timestamp } from "firebase/firestore";
 import styles from "./Message.module.scss";
+import moment from "moment";
 
 interface Props {
   type: "received" | "sent";
   message: {
-    // sentAt: FieldValue;
+    sentAt: Timestamp;
     senderUid: string;
     receiverUid: string;
     content: {
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const Message: React.FC<Props> = ({ type, message }) => {
+  const { sentAt } = message;
   return (
     <div
       className={
@@ -23,7 +25,8 @@ const Message: React.FC<Props> = ({ type, message }) => {
     >
       <p>{message.content.text}</p>
 
-      <span>09:31 AM</span>
+      {/* <span>09:31 AM</span> */}
+      <span>{moment(sentAt.toDate()).format("LT")}</span>
     </div>
   );
 };

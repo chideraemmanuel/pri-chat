@@ -7,6 +7,10 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreTypes } from "@/redux/store";
 import {
+  clearSignUpEmailError,
+  clearSignUpFirstNameError,
+  clearSignUpLastNameError,
+  clearSignUpPasswordError,
   resetAllForms,
   resetErrors,
   resetSignInForm,
@@ -139,6 +143,7 @@ const SignUp: React.FC = () => {
                   value={firstName.value}
                   setValue={setSignUpFirstName}
                   error={firstName.error}
+                  clearError={clearSignUpFirstNameError}
                 />
                 <FormInput
                   type="text"
@@ -146,6 +151,7 @@ const SignUp: React.FC = () => {
                   value={lastName.value}
                   setValue={setSignUpLastName}
                   error={lastName.error}
+                  clearError={clearSignUpLastNameError}
                 />
               </div>
               <FormInput
@@ -155,6 +161,7 @@ const SignUp: React.FC = () => {
                 value={email.value}
                 setValue={setSignUpEmail}
                 error={email.error}
+                clearError={clearSignUpEmailError}
               />
               <FormInput
                 type="password"
@@ -162,6 +169,7 @@ const SignUp: React.FC = () => {
                 value={password.value}
                 setValue={setSignUpPassword}
                 error={password.error}
+                clearError={clearSignUpPasswordError}
               />
 
               {/* <button>Sign up</button> */}

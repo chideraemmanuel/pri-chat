@@ -1,9 +1,15 @@
 import { auth, db } from "@/config/firebase";
-import { FieldValue, collection, doc, onSnapshot } from "firebase/firestore";
+import {
+  FieldValue,
+  Timestamp,
+  collection,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 interface MessageTypes {
-  sentAt: FieldValue;
+  sentAt: Timestamp;
   senderUid: string;
   receiverUid: string;
   content: {

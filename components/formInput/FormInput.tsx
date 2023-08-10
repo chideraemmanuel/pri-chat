@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styles from "./FormInput.module.scss";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ interface Props {
   value: any;
   setValue: any;
   error: null | string;
+  clearError: any;
 }
 
 const FormInput: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const FormInput: React.FC<Props> = ({
   value,
   setValue,
   error,
+  clearError,
 }) => {
   const dispatch = useDispatch();
 
@@ -34,6 +36,11 @@ const FormInput: React.FC<Props> = ({
     }
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(clearError());
+    dispatch(setValue(e.target.value));
+  };
+
   return (
     <div className={error ? styles.formInputError : styles.formInput}>
       <div
@@ -44,7 +51,7 @@ const FormInput: React.FC<Props> = ({
         <input
           type={type === "password" ? passwordCurrentType : type}
           value={value}
-          onChange={(e) => dispatch(setValue(e.target.value))}
+          onChange={(e) => handleChange(e)}
           className={value.length > 0 ? styles.formInput__input_valid : ""}
         />
         <span>{placeholder}</span>

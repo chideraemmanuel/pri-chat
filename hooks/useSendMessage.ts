@@ -11,7 +11,7 @@ import {
 import { useMutation } from "react-query";
 
 interface MessageTypes {
-  //   sentAt: Timestamp;
+  // sentAt: Timestamp;
   sentAt: FieldValue;
   senderUid: string;
   receiverUid: string;
@@ -24,19 +24,23 @@ interface MessageTypes {
 const sendMessage = async (payload: MessageTypes) => {
   const { senderUid, receiverUid, content, sentAt } = payload;
 
+  // UPDATE ON SENDER'S CHATS
   const senderChatsReference = doc(
     db,
     `users/${senderUid}/chats/${receiverUid}`
   );
 
   await setDoc(senderChatsReference, {
-    senderUid: receiverUid,
+    // senderUid: receiverUid,
+    senderUid: senderUid,
+    sentAt: serverTimestamp(),
     latestMessage: {
-      sentAt: serverTimestamp(),
+      // sentAt: serverTimestamp(),
       ...content,
     },
   });
 
+  // UPDATE ON RECEIVER'S CHATS
   const receiverChatsReference = doc(
     db,
     `users/${receiverUid}/chats/${senderUid}`
@@ -44,12 +48,14 @@ const sendMessage = async (payload: MessageTypes) => {
 
   await setDoc(receiverChatsReference, {
     senderUid: senderUid,
+    sentAt: serverTimestamp(),
     latestMessage: {
-      sentAt: serverTimestamp(),
+      // sentAt: serverTimestamp(),
       ...content,
     },
   });
 
+  // UPDATE ON SENDER'S CONVERSATION
   const senderConversationReference = doc(
     db,
     `users/${senderUid}/chats/${receiverUid}/fullConversation/${receiverUid}`
@@ -59,11 +65,17 @@ const sendMessage = async (payload: MessageTypes) => {
     senderConversationReference,
     {
       // messages: arrayUnion(payload),
-      messages: arrayUnion({ senderUid, receiverUid, content }),
+      messages: arrayUnion({
+        senderUid,
+        receiverUid,
+        content,
+        sentAt: Timestamp.now(),
+      }),
     },
     { merge: true }
   );
 
+  // UPDATE ON RECEIVER'S CONVERSATION
   const receiverConversationReference = doc(
     db,
     `users/${receiverUid}/chats/${senderUid}/fullConversation/${senderUid}`
@@ -73,7 +85,12 @@ const sendMessage = async (payload: MessageTypes) => {
     receiverConversationReference,
     {
       // messages: arrayUnion(payload),
-      messages: arrayUnion({ senderUid, receiverUid, content }),
+      messages: arrayUnion({
+        senderUid,
+        receiverUid,
+        content,
+        sentAt: Timestamp.now(),
+      }),
     },
     { merge: true }
   );

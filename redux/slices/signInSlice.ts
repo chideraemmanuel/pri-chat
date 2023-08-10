@@ -133,6 +133,24 @@ const signInSlice = createSlice({
     ) => {
       state.login.password.error = action.payload;
     },
+    clearSignUpFirstNameError: (state: SignInStateTypes) => {
+      state.signUp.firstName.error = null;
+    },
+    clearSignUpLastNameError: (state: SignInStateTypes) => {
+      state.signUp.lastName.error = null;
+    },
+    clearSignUpEmailError: (state: SignInStateTypes) => {
+      state.signUp.email.error = null;
+    },
+    clearSignUpPasswordError: (state: SignInStateTypes) => {
+      state.signUp.password.error = null;
+    },
+    clearLoginEmailError: (state: SignInStateTypes) => {
+      state.login.email.error = null;
+    },
+    clearLoginPasswordError: (state: SignInStateTypes) => {
+      state.login.password.error = null;
+    },
     resetSignInForm: (state: SignInStateTypes) => {
       state.signUp.firstName = { value: "", error: null };
       state.signUp.lastName = { value: "", error: null };
@@ -177,6 +195,12 @@ export const {
   setSignUpPasswordError,
   setLoginEmailError,
   setLoginPasswordError,
+  clearSignUpFirstNameError,
+  clearSignUpLastNameError,
+  clearSignUpEmailError,
+  clearSignUpPasswordError,
+  clearLoginEmailError,
+  clearLoginPasswordError,
   resetSignInForm,
   resetLoginForm,
   resetAllForms,

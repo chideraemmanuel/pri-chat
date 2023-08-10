@@ -41,6 +41,10 @@ const ConversationBox: React.FC = () => {
       return;
     }
 
+    if (message.length === 0) {
+      return;
+    }
+
     sendMessage({
       sentAt: serverTimestamp(),
       // @ts-ignore

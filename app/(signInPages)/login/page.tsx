@@ -7,11 +7,15 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreTypes } from "@/redux/store";
 import {
+  clearLoginEmailError,
+  clearLoginPasswordError,
   resetAllForms,
   resetErrors,
   resetLoginForm,
   setLoginEmail,
+  setLoginEmailError,
   setLoginPassword,
+  setLoginPasswordError,
 } from "@/redux/slices/signInSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/config/firebase";
@@ -36,9 +40,24 @@ const LoginPage: React.FC = () => {
 
   const { mutate: login, isLoading: isLoggingIn } = useLogin();
 
+  const emailRegex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,5})(\.[a-z]{2,5})?$/;
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(resetErrors());
+
+    if (email.value.length === 0) {
+      dispatch(setLoginEmailError("Please enter your email"));
+      return;
+    }
+    if (!emailRegex.test(email.value)) {
+      dispatch(setLoginEmailError("Please enter a valid email"));
+      return;
+    }
+    if (password.value.length === 0) {
+      dispatch(setLoginPasswordError("Please enter your password"));
+      return;
+    }
 
     await login({
       email: email.value,
@@ -66,11 +85,12 @@ const LoginPage: React.FC = () => {
 
             <form onSubmit={(e) => handleSubmit(e)}>
               <FormInput
-                type="email"
+                type="text"
                 placeholder="Enter your email"
                 value={email.value}
                 setValue={setLoginEmail}
                 error={email.error}
+                clearError={clearLoginEmailError}
               />
               <FormInput
                 type="password"
@@ -78,6 +98,7 @@ const LoginPage: React.FC = () => {
                 value={password.value}
                 setValue={setLoginPassword}
                 error={password.error}
+                clearError={clearLoginPasswordError}
               />
 
               <button disabled={isLoggingIn}>

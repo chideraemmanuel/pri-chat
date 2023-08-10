@@ -79,7 +79,7 @@ const users = [
 ];
 
 const FindUsersPage: React.FC = () => {
-  // const { data: users, isLoading} = useGetUsers()
+  const { data: users, isLoading } = useGetUsers();
 
   return (
     <div className={styles.findUsersPage}>

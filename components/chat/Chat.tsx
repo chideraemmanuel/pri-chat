@@ -4,11 +4,15 @@ import profileImage from "@/assets/profile.jpg";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useDispatch } from "react-redux";
 import { setActiveChat } from "@/redux/slices/chatsSlice";
+import { auth } from "@/config/firebase";
+import { FaCheck } from "react-icons/fa";
+import { Timestamp } from "firebase/firestore";
+import moment from "moment";
 
 interface Props {
   senderUid: string;
+  sentAt: Timestamp;
   latestMessage: {
-    sentAt: string;
     text: null | string;
     image: null | string;
   };
@@ -16,11 +20,15 @@ interface Props {
 
 const Chat: React.FC<Props> = ({
   senderUid,
-  latestMessage: { text, image, sentAt },
+  sentAt,
+  latestMessage: { text, image },
 }) => {
   const { data: sender } = useGetUser(senderUid);
 
   const dispatch = useDispatch();
+
+  // console.log(senderUid);
+  // console.log(auth.currentUser?.uid);
 
   const handleClick = () => {
     dispatch(
@@ -46,13 +54,35 @@ const Chat: React.FC<Props> = ({
                 {sender?.firstName} {sender?.lastName}
               </h3>
               {/* <p>What's up?</p> */}
-              {text && <p>{text}</p>}
+              {/* {text && (
+                <>
+                  {senderUid === auth.currentUser?.uid ? (
+                    <p>
+                      <FaCheck /> {text}{" "}
+                    </p>
+                  ) : (
+                    <p>
+                      <FaCheck />
+                      {text}
+                    </p>
+                  )}
+                </>
+              )} */}
+
+              {text && (
+                <p>
+                  {senderUid === auth.currentUser?.uid && <FaCheck />} {text}
+                </p>
+              )}
             </div>
           </div>
 
           <div className={styles.chat__tag}>
-            <span className={styles.chat__tag_time}>9:37 PM</span>
-            <div className={styles.chat__tag_unread}></div>
+            <span className={styles.chat__tag_time}>
+              {moment(sentAt.toDate()).format("LT")}
+            </span>
+            {/* <span className={styles.chat__tag_time}>9:37 PM</span> */}
+            {/* <div className={styles.chat__tag_unread}></div> */}
           </div>
         </div>
       )}

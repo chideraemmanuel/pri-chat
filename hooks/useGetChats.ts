@@ -1,5 +1,12 @@
 import { auth, db } from "@/config/firebase";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import {
+  Timestamp,
+  collection,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
@@ -46,10 +53,11 @@ import { useQuery } from "react-query";
 //   return useQuery(["get chats", auth.currentUser?.uid], getChats);
 // };
 
-interface ChatTypes {
-  senderUid: string;
+export interface ChatTypes {
+  chatId: string;
+  sentAt: Timestamp;
   latestMessage: {
-    sentAt: string;
+    senderUid: string;
     text: null | string;
     image: null | string;
   };
@@ -64,10 +72,17 @@ export const useGetChats = () => {
       `users/${auth.currentUser?.uid}/chats`
     );
 
+    const q = query(
+      chatsReference,
+      // orderBy("latestMessage"),
+      // orderBy("sentAt", "asc")
+      orderBy("sentAt", "desc")
+    );
+
     const getChats = () => {
-      const unsubscribe = onSnapshot(chatsReference, (snapshot) => {
+      const unsubscribe = onSnapshot(q, (snapshot) => {
         const result = snapshot.docs.map((item) => {
-          return { ...item.data(), id: item.id };
+          return { ...item.data(), chatId: item.id };
         });
 
         setData(result);
