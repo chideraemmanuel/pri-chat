@@ -8,22 +8,24 @@ import { auth } from "@/config/firebase";
 import { FaCheck } from "react-icons/fa";
 import { Timestamp } from "firebase/firestore";
 import moment from "moment";
+import { ChatTypes } from "@/hooks/useGetChats";
 
-interface Props {
-  senderUid: string;
-  sentAt: Timestamp;
-  latestMessage: {
-    text: null | string;
-    image: null | string;
-  };
-}
+// interface Props {
+//   chatId: string;
+//   sentAt: Timestamp;
+//   latestMessage: {
+//     senderUid: string;
+//     text: null | string;
+//     image: null | string;
+//   };
+// }
 
-const Chat: React.FC<Props> = ({
-  senderUid,
+const Chat: React.FC<ChatTypes> = ({
+  chatId,
   sentAt,
-  latestMessage: { text, image },
+  latestMessage: { senderUid, text, image },
 }) => {
-  const { data: sender } = useGetUser(senderUid);
+  const { data: sender } = useGetUser(chatId);
 
   const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ const Chat: React.FC<Props> = ({
   const handleClick = () => {
     dispatch(
       setActiveChat({
-        receiverUid: senderUid,
+        receiverUid: sender?.uid,
         receiverFirstName: sender?.firstName,
         receiverLastName: sender?.lastName,
         receiverProfileImage: sender?.profileImage,

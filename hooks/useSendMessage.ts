@@ -31,11 +31,11 @@ const sendMessage = async (payload: MessageTypes) => {
   );
 
   await setDoc(senderChatsReference, {
-    // senderUid: receiverUid,
-    senderUid: senderUid,
+    // PLACED sentAt OUTSIDE lastMessage FOR SORTING PURPOSES
     sentAt: serverTimestamp(),
     latestMessage: {
       // sentAt: serverTimestamp(),
+      senderUid: senderUid,
       ...content,
     },
   });
@@ -47,10 +47,11 @@ const sendMessage = async (payload: MessageTypes) => {
   );
 
   await setDoc(receiverChatsReference, {
-    senderUid: senderUid,
+    // PLACED sentAt OUTSIDE lastMessage FOR SORTING PURPOSES
     sentAt: serverTimestamp(),
     latestMessage: {
       // sentAt: serverTimestamp(),
+      senderUid: senderUid,
       ...content,
     },
   });
