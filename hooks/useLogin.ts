@@ -8,6 +8,8 @@ import {
   setLoginEmailError,
   setLoginPasswordError,
 } from "@/redux/slices/signInSlice";
+import { useRouter } from "next/navigation";
+import { setCurrentUser } from "@/redux/slices/authSlice";
 
 // const login = async (credentials: { email: string; password: string }) => {
 //   const { email, password } = credentials;
@@ -21,6 +23,7 @@ import {
 
 export const useLogin = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<null | string | any>(null);
@@ -37,6 +40,16 @@ export const useLogin = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+
+      // NAVIGATES TO CHATS PAGE UPON LOGIN
+      dispatch(
+        setCurrentUser({
+          isLoading: false,
+          active: true,
+        })
+      );
+
+      router.push("/home/chats");
 
       dispatch(resetAllForms());
       setIsLoading(false);

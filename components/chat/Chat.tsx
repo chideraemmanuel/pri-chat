@@ -26,6 +26,8 @@ const Chat: React.FC<ChatTypes> = ({
   latestMessage: { senderUid, text, image },
 }) => {
   const { data: sender } = useGetUser(chatId);
+  console.log(chatId);
+  console.log(sender);
 
   const dispatch = useDispatch();
 
@@ -55,21 +57,6 @@ const Chat: React.FC<ChatTypes> = ({
               <h3>
                 {sender?.firstName} {sender?.lastName}
               </h3>
-              {/* <p>What's up?</p> */}
-              {/* {text && (
-                <>
-                  {senderUid === auth.currentUser?.uid ? (
-                    <p>
-                      <FaCheck /> {text}{" "}
-                    </p>
-                  ) : (
-                    <p>
-                      <FaCheck />
-                      {text}
-                    </p>
-                  )}
-                </>
-              )} */}
 
               {text && (
                 <p>

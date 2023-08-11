@@ -32,7 +32,8 @@ const sendMessage = async (payload: MessageTypes) => {
 
   await setDoc(senderChatsReference, {
     // PLACED sentAt OUTSIDE lastMessage FOR SORTING PURPOSES
-    sentAt: serverTimestamp(),
+    // sentAt: serverTimestamp(),
+    sentAt: Timestamp.now(),
     latestMessage: {
       // sentAt: serverTimestamp(),
       senderUid: senderUid,
@@ -48,7 +49,8 @@ const sendMessage = async (payload: MessageTypes) => {
 
   await setDoc(receiverChatsReference, {
     // PLACED sentAt OUTSIDE lastMessage FOR SORTING PURPOSES
-    sentAt: serverTimestamp(),
+    // sentAt: serverTimestamp(),
+    sentAt: Timestamp.now(),
     latestMessage: {
       // sentAt: serverTimestamp(),
       senderUid: senderUid,

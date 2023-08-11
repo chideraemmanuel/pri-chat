@@ -1,10 +1,12 @@
 import { auth, db } from "@/config/firebase";
+import { setCurrentUser } from "@/redux/slices/authSlice";
 import { resetAllForms, setSignUpEmailError } from "@/redux/slices/signInSlice";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
@@ -48,6 +50,7 @@ interface UserTypes {
 
 export const useSignUp = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -87,8 +90,19 @@ export const useSignUp = () => {
         profileImage: null,
       };
 
+      // CREATES USER DOCUMENT
       // await setDoc(userDocumentReference, data, { merge: true });
       await setDoc(userDocumentReference, data);
+
+      // NAVIGATES TO CHATS PAGE AFTER DOCUMENT HAS BEEN CREATED
+      dispatch(
+        setCurrentUser({
+          isLoading: false,
+          active: true,
+        })
+      );
+
+      router.push("/home/chats");
 
       dispatch(resetAllForms());
       setIsLoading(false);

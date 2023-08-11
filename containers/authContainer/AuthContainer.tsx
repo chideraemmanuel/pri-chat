@@ -15,15 +15,35 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   onAuthStateChanged(auth, (user) => {
+    dispatch(
+      setCurrentUser({
+        isLoading: true,
+        active: false,
+      })
+    );
+
     if (user) {
-      dispatch(
-        setCurrentUser({
-          isLoading: false,
-          active: true,
-        })
-      );
+      // dispatch(
+      //   setCurrentUser({
+      //     isLoading: false,
+      //     active: true,
+      //   })
+      // );
       //   router.replace("/");
-      router.push("/home/chats");
+      // router.push("/home/chats");
+
+      // USED TIMEOUT SO NAVIGATION DOESN'T HAPPEN IMMEDIATELY WHEN USER IS ACTIVE
+      // THIS IS TO ENSURE THAT DURING SIGN UP, A USER DOCUMENT IS CREATED ON FIRESTORE BEFORE ROUTING TAKES PLACE.
+      setTimeout(() => {
+        dispatch(
+          setCurrentUser({
+            isLoading: false,
+            active: true,
+          })
+        );
+
+        router.push("/home/chats");
+      }, 3000);
     } else if (!user) {
       dispatch(
         setCurrentUser({

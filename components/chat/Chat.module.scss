@@ -13,7 +13,9 @@
   }
 
   &__info {
-    display: flex;
+    // display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 7px;
 
@@ -44,6 +46,22 @@
       p {
         font-size: var(--xs-font);
         color: var(--gray-700);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: start;
+        // width: 150px;
+        // width: max(170px, 15vw);
+        // width: 150px;
+
+        // @media screen and (max-width: 768px) {
+        //   width: auto;
+        // }
+
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
   }
