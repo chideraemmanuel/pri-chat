@@ -15,12 +15,12 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   onAuthStateChanged(auth, (user) => {
-    dispatch(
-      setCurrentUser({
-        isLoading: true,
-        active: false,
-      })
-    );
+    // dispatch(
+    //   setCurrentUser({
+    //     isLoading: true,
+    //     active: false,
+    //   })
+    // );
 
     if (user) {
       // dispatch(

@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface NavigationStateTypes {
   searchBarActive: boolean;
   searchKeyword: string;
+  navigationMenuOpen: boolean;
 }
 
 const initialState: NavigationStateTypes = {
   searchBarActive: false,
   searchKeyword: "",
+  navigationMenuOpen: false,
 };
 
 const navigationSlice = createSlice({
@@ -26,6 +28,13 @@ const navigationSlice = createSlice({
     clearSearchKeyword: (state: NavigationStateTypes) => {
       state.searchKeyword = "";
     },
+    toggleNavigationMenu: (state: NavigationStateTypes) => {
+      if (state.navigationMenuOpen) {
+        state.navigationMenuOpen = false;
+      } else {
+        state.navigationMenuOpen = true;
+      }
+    },
   },
 });
 
@@ -34,6 +43,7 @@ export const {
   closeSearchBar,
   setSearchKeyword,
   clearSearchKeyword,
+  toggleNavigationMenu,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;
