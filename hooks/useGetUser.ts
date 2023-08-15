@@ -32,7 +32,7 @@ interface UserTypes {
   firstName: string;
   lastName: string;
   email: string;
-  profileImage: null;
+  profileImage: null | string;
 }
 
 const getUser = async ({ queryKey }: { queryKey: any[] }) => {

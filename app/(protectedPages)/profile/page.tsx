@@ -3,13 +3,30 @@
 import { FiArrowLeft, FiEdit, FiEdit2, FiEdit3 } from "react-icons/fi";
 import styles from "./page.module.scss";
 import Image from "next/image";
-import profileImamge from "@/assets/profile.jpg";
+import defaultProfileImage from "@/assets/profile.jpg";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import { useGetUser } from "@/hooks/useGetUser";
+import { auth } from "@/config/firebase";
+import { useEffect } from "react";
+import {
+  setProfileFirstName,
+  setProfileImageSrc,
+  setProfileLastName,
+} from "@/redux/slices/profileSlice";
 
 const ProfilePage: React.FC = () => {
+  const { data: currentUser } = useGetUser(auth.currentUser?.uid);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(setProfileFirstName(currentUser?.firstName));
+      dispatch(setProfileLastName(currentUser?.lastName));
+      dispatch(setProfileImageSrc(currentUser?.profileImage));
+    }
+  }, [currentUser]);
 
   const handleEdit = () => {
     router.push("/profile/edit");
@@ -39,12 +56,21 @@ const ProfilePage: React.FC = () => {
 
       <div className={styles.profilePage__body}>
         <div className={styles.profilePage__body_image}>
-          <Image src={profileImamge} alt="" />
+          <Image
+            src={currentUser?.profileImage ?? defaultProfileImage}
+            alt=""
+            width={50}
+            height={50}
+          />
         </div>
 
         <div className={styles.profilePage__body_info}>
-          <h4>Chidera Emmanuel</h4>
-          <span>chideraemmanuel@gmail.com</span>
+          <h4>
+            {currentUser?.firstName} {currentUser?.lastName}
+          </h4>
+          <span>{currentUser?.email}</span>
+          {/* <h4>Chidera Emmanuel</h4>
+          <span>chideraemmanuel@gmail.com</span> */}
         </div>
       </div>
     </div>

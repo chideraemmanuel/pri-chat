@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const { data: user } = useGetUser(auth.currentUser?.uid);
+  const { data: currentUser } = useGetUser(auth.currentUser?.uid);
 
   const handleLogout = () => {
     dispatch(toggleNavigationMenu());
@@ -65,7 +65,12 @@ const Navbar: React.FC = () => {
           className={styles.navbar__right_profile}
           // onClick={() => dispatch(setActiveChat("okay"))}
         >
-          <Image src={user?.profileImage ?? profileImage} alt="" />
+          <Image
+            src={currentUser?.profileImage ?? profileImage}
+            alt=""
+            width={50}
+            height={50}
+          />
         </button>
       </div>
     </div>
