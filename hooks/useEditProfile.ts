@@ -18,11 +18,13 @@ export const useEditProfile = () => {
   const mutate = async (payload: PayloadTypes) => {
     setIsLoading(true);
 
+    const userDocumentReference = doc(db, "users", auth.currentUser?.uid);
+
     const { profileImage } = payload;
 
     if (profileImage) {
       // upload to storage
-      console.log(profileImage);
+      // console.log(profileImage);
       const fileFormat = profileImage.type.split("/")[1];
       const storageRef = ref(
         storage,
@@ -46,14 +48,14 @@ export const useEditProfile = () => {
         async () => {
           const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
           // setProfileImageUrl(imageUrl);
-          console.log(imageUrl);
+          // console.log(imageUrl);
 
-          setData({
-            ...payload,
-            profileImage: imageUrl,
-          });
+          // setData({
+          //   ...payload,
+          //   profileImage: imageUrl,
+          // });
 
-          const userDocumentReference = doc(db, "users", auth.currentUser?.uid);
+          // const userDocumentReference = doc(db, "users", auth.currentUser?.uid);
 
           // await setDoc(userDocumentReference, data, { merge: true });
           await setDoc(
@@ -71,26 +73,11 @@ export const useEditProfile = () => {
         }
       );
     } else {
-      setData(payload);
+      // const userDocumentReference = doc(db, "users", auth.currentUser?.uid);
+      await setDoc(userDocumentReference, payload, { merge: true });
+
       setIsLoading(false);
     }
-
-    // try {
-    //   // const data = {
-    //   //   ...payload,
-    //   //   profileImage: profileImageUrl,
-    //   // };
-
-    //   // console.log(data);
-
-    //   // const userDocumentReference = doc(db, "users", auth.currentUser?.uid);
-
-    //   // await setDoc(userDocumentReference, data, { merge: true });
-
-    //   setIsLoading(false);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return { mutate, isLoading };

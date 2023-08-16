@@ -59,8 +59,8 @@ const ProfilePage: React.FC = () => {
           <Image
             src={currentUser?.profileImage ?? defaultProfileImage}
             alt=""
-            width={50}
-            height={50}
+            width={300}
+            height={300}
           />
         </div>
 

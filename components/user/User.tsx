@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./User.module.scss";
-import profileImageAlt from "@/assets/profile.jpg";
+import defaultProfileImage from "@/assets/profile.jpg";
 import { useDispatch } from "react-redux";
 import { setActiveChat } from "@/redux/slices/chatsSlice";
 import { closeSearchBar } from "@/redux/slices/navigationSlice";
@@ -35,7 +35,12 @@ const User: React.FC<Props> = ({ uid, profileImage, firstName, lastName }) => {
   return (
     <div className={styles.user} onClick={handleClick}>
       <div className={styles.user__image}>
-        <Image src={profileImage ?? profileImageAlt} alt="" />
+        <Image
+          src={profileImage ?? defaultProfileImage}
+          alt=""
+          width={300}
+          height={300}
+        />
       </div>
       <span>
         {firstName} {lastName}

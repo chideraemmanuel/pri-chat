@@ -5,7 +5,7 @@ import styles from "./Navbar.module.scss";
 import Image from "next/image";
 import { useGetUser } from "@/hooks/useGetUser";
 import { auth } from "@/config/firebase";
-import profileImage from "@/assets/profile.jpg";
+import defaultProfileImage from "@/assets/profile.jpg";
 import { signOut } from "firebase/auth";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -66,10 +66,10 @@ const Navbar: React.FC = () => {
           // onClick={() => dispatch(setActiveChat("okay"))}
         >
           <Image
-            src={currentUser?.profileImage ?? profileImage}
+            src={currentUser?.profileImage ?? defaultProfileImage}
             alt=""
-            width={50}
-            height={50}
+            width={300}
+            height={300}
           />
         </button>
       </div>

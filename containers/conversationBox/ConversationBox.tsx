@@ -12,7 +12,7 @@ import {
 } from "react-icons/fi";
 import { FaClipboard } from "react-icons/fa";
 import Image from "next/image";
-import profileImage from "@/assets/profile.jpg";
+import defaultProfileImage from "@/assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { closeActiveChat, setMessage } from "@/redux/slices/chatsSlice";
 import { StoreTypes } from "@/redux/store";
@@ -77,7 +77,12 @@ const ConversationBox: React.FC = () => {
               </button>
 
               <button>
-                <Image src={profileImage} alt="" />
+                <Image
+                  src={activeChat.receiverProfileImage ?? defaultProfileImage}
+                  alt=""
+                  width={300}
+                  height={300}
+                />
               </button>
 
               <div>

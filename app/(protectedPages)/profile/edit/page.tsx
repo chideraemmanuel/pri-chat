@@ -38,7 +38,7 @@ const ProfileEditPage: React.FC = () => {
 
     await editProfile({ firstName, lastName, profileImage });
 
-    // router.replace("/profile");
+    router.replace("/profile");
   };
 
   return (
@@ -74,8 +74,8 @@ const ProfileEditPage: React.FC = () => {
             <Image
               src={currentUser?.profileImage ?? defaultProfileImage}
               alt=""
-              width={50}
-              height={50}
+              width={300}
+              height={300}
             />
           </div>
 

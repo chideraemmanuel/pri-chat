@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./Chat.module.scss";
-import profileImage from "@/assets/profile.jpg";
+import defaultProfileImage from "@/assets/profile.jpg";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useDispatch } from "react-redux";
 import { setActiveChat } from "@/redux/slices/chatsSlice";
@@ -26,8 +26,8 @@ const Chat: React.FC<ChatTypes> = ({
   latestMessage: { senderUid, text, image },
 }) => {
   const { data: sender } = useGetUser(chatId);
-  console.log(chatId);
-  console.log(sender);
+  // console.log(chatId);
+  // console.log(sender);
 
   const dispatch = useDispatch();
 
@@ -51,7 +51,12 @@ const Chat: React.FC<ChatTypes> = ({
         <div className={styles.chat} onClick={handleClick}>
           <div className={styles.chat__info}>
             <div className={styles.chat__info_image}>
-              <Image src={sender?.profileImage ?? profileImage} alt="" />
+              <Image
+                src={sender?.profileImage ?? defaultProfileImage}
+                alt=""
+                width={300}
+                height={300}
+              />
             </div>
             <div className={styles.chat__info_content}>
               <h3>
