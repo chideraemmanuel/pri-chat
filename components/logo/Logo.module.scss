@@ -3,8 +3,18 @@
   align-items: center;
   gap: 7px;
 
-  svg {
-    font-size: var(--lg-font);
+  // svg {
+  //   font-size: var(--lg-font);
+  // }
+
+  &__image {
+    width: var(--lg-font);
+    height: var(--lg-font);
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   span {

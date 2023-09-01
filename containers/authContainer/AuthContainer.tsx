@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import FullScreenLoader from "@/components/fullScreenLoader/FullScreenLoader";
-import { auth } from "@/config/firebase";
-import { setCurrentUser } from "@/redux/slices/authSlice";
-import { StoreTypes } from "@/redux/store";
-import { onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import FullScreenLoader from '@/components/fullScreenLoader/FullScreenLoader';
+import { auth } from '@/config/firebase';
+import { setCurrentUser } from '@/redux/slices/authSlice';
+import { StoreTypes } from '@/redux/store';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AuthContainer = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
           })
         );
 
-        router.push("/home/chats");
+        router.replace('/home/chats');
       }, 3000);
     } else if (!user) {
       dispatch(
@@ -52,7 +52,7 @@ const AuthContainer = ({ children }: { children: React.ReactNode }) => {
         })
       );
       //   router.replace("/login");
-      router.push("/login");
+      router.replace('/login');
     }
   });
 

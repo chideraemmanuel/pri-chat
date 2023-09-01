@@ -1,6 +1,6 @@
-import { auth, db } from "@/config/firebase";
-import { collection, getDocs, query } from "firebase/firestore";
-import { useQuery } from "react-query";
+import { auth, db } from '@/config/firebase';
+import { collection, getDocs, query } from 'firebase/firestore';
+import { useQuery } from 'react-query';
 
 interface UserTypes {
   uid: string;
@@ -12,10 +12,11 @@ interface UserTypes {
 
 const getUsers = async () => {
   // const q = query()
-  const usersCollectionReference = collection(db, "users");
+  const usersCollectionReference = collection(db, 'users');
 
   const response = await getDocs(usersCollectionReference);
 
+  // @ts-ignore
   const result: UserTypes[] = response.docs.map((item) => {
     return { ...item.data(), id: item.id };
   });
@@ -28,5 +29,5 @@ const getUsers = async () => {
 };
 
 export const useGetUsers = () => {
-  return useQuery(["get users"], getUsers);
+  return useQuery(['get users'], getUsers);
 };

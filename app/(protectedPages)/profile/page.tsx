@@ -1,21 +1,22 @@
-"use client";
+'use client';
 
-import { FiArrowLeft, FiEdit, FiEdit2, FiEdit3 } from "react-icons/fi";
-import styles from "./page.module.scss";
-import Image from "next/image";
-import defaultProfileImage from "@/assets/profile.jpg";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
-import { useGetUser } from "@/hooks/useGetUser";
-import { auth } from "@/config/firebase";
-import { useEffect } from "react";
+import { FiArrowLeft, FiEdit, FiEdit2, FiEdit3 } from 'react-icons/fi';
+import styles from './page.module.scss';
+import Image from 'next/image';
+import defaultProfileImage from '@/assets/profile.jpg';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { useGetUser } from '@/hooks/useGetUser';
+import { auth } from '@/config/firebase';
+import { useEffect } from 'react';
 import {
   setProfileFirstName,
   setProfileImageSrc,
   setProfileLastName,
-} from "@/redux/slices/profileSlice";
+} from '@/redux/slices/profileSlice';
 
 const ProfilePage: React.FC = () => {
+  // @ts-ignore
   const { data: currentUser } = useGetUser(auth.currentUser?.uid);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -24,12 +25,13 @@ const ProfilePage: React.FC = () => {
     if (currentUser) {
       dispatch(setProfileFirstName(currentUser?.firstName));
       dispatch(setProfileLastName(currentUser?.lastName));
+      // @ts-ignore
       dispatch(setProfileImageSrc(currentUser?.profileImage));
     }
   }, [currentUser]);
 
   const handleEdit = () => {
-    router.push("/profile/edit");
+    router.push('/profile/edit');
   };
 
   return (

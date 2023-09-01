@@ -1,8 +1,8 @@
-import { auth, db, storage } from "@/config/firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { useState } from "react";
-import { useMutation } from "react-query";
+import { auth, db, storage } from '@/config/firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { useState } from 'react';
+import { useMutation } from 'react-query';
 
 interface PayloadTypes {
   firstName?: string;
@@ -18,14 +18,15 @@ export const useEditProfile = () => {
   const mutate = async (payload: PayloadTypes) => {
     setIsLoading(true);
 
-    const userDocumentReference = doc(db, "users", auth.currentUser?.uid);
+    // @ts-ignore
+    const userDocumentReference = doc(db, 'users', auth.currentUser?.uid);
 
     const { profileImage } = payload;
 
     if (profileImage) {
       // upload to storage
       // console.log(profileImage);
-      const fileFormat = profileImage.type.split("/")[1];
+      const fileFormat = profileImage.type.split('/')[1];
       const storageRef = ref(
         storage,
         `usersProfileImages/${auth.currentUser?.uid}.${fileFormat}`
@@ -34,7 +35,7 @@ export const useEditProfile = () => {
       const uploadTask = uploadBytesResumable(storageRef, profileImage);
 
       uploadTask.on(
-        "state_changed",
+        'state_changed',
         // ON RESUME
         (snapshot) => {
           const progress =

@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { FiMenu, FiSearch } from "react-icons/fi";
-import styles from "./Navbar.module.scss";
-import Image from "next/image";
-import { useGetUser } from "@/hooks/useGetUser";
-import { auth } from "@/config/firebase";
-import defaultProfileImage from "@/assets/profile.jpg";
-import { signOut } from "firebase/auth";
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreTypes } from "@/redux/store";
-import { toggleNavigationMenu } from "@/redux/slices/navigationSlice";
+import { FiMenu, FiSearch } from 'react-icons/fi';
+import styles from './Navbar.module.scss';
+import Image from 'next/image';
+import { useGetUser } from '@/hooks/useGetUser';
+import { auth } from '@/config/firebase';
+import defaultProfileImage from '@/assets/profile.jpg';
+import { signOut } from 'firebase/auth';
+import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { StoreTypes } from '@/redux/store';
+import { toggleNavigationMenu } from '@/redux/slices/navigationSlice';
 
 const Navbar: React.FC = () => {
   const { navigationMenuOpen } = useSelector(
@@ -19,6 +19,7 @@ const Navbar: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const { data: currentUser } = useGetUser(auth.currentUser?.uid);
 
   const handleLogout = () => {
@@ -40,7 +41,7 @@ const Navbar: React.FC = () => {
           <ul className={styles.navbar__menu_list}>
             <li>
               <Link
-                href={"/profile"}
+                href={'/profile'}
                 onClick={() => dispatch(toggleNavigationMenu())}
               >
                 Profile

@@ -1,24 +1,25 @@
-"use client";
+'use client';
 
-import { FiArrowLeft, FiImage } from "react-icons/fi";
-import styles from "./page.module.scss";
-import Image from "next/image";
-import defaultProfileImage from "@/assets/profile.jpg";
-import FormInput from "@/components/formInput/FormInput";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreTypes } from "@/redux/store";
+import { FiArrowLeft, FiImage } from 'react-icons/fi';
+import styles from './page.module.scss';
+import Image from 'next/image';
+import defaultProfileImage from '@/assets/profile.jpg';
+import FormInput from '@/components/formInput/FormInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { StoreTypes } from '@/redux/store';
 import {
   setProfileFirstName,
   setProfileImageSrc,
   setProfileLastName,
-} from "@/redux/slices/profileSlice";
-import { useGetUser } from "@/hooks/useGetUser";
-import { auth } from "@/config/firebase";
-import { useEditProfile } from "@/hooks/useEditProfile";
-import FullScreenLoader from "@/components/fullScreenLoader/FullScreenLoader";
-import { useRouter } from "next/navigation";
+} from '@/redux/slices/profileSlice';
+import { useGetUser } from '@/hooks/useGetUser';
+import { auth } from '@/config/firebase';
+import { useEditProfile } from '@/hooks/useEditProfile';
+import FullScreenLoader from '@/components/fullScreenLoader/FullScreenLoader';
+import { useRouter } from 'next/navigation';
 
 const ProfileEditPage: React.FC = () => {
+  // @ts-ignore
   const { data: currentUser } = useGetUser(auth.currentUser?.uid);
 
   const { firstName, lastName, profileImage } = useSelector(
@@ -32,13 +33,14 @@ const ProfileEditPage: React.FC = () => {
 
   const handleEditProfile = async () => {
     if (!navigator.onLine) {
-      alert("Please check your internet connection");
+      alert('Please check your internet connection');
       return;
     }
 
+    // @ts-ignore
     await editProfile({ firstName, lastName, profileImage });
 
-    router.replace("/profile");
+    router.replace('/profile');
   };
 
   return (
@@ -63,6 +65,7 @@ const ProfileEditPage: React.FC = () => {
               type="file"
               name=""
               id="profileImage"
+              // @ts-ignore
               onChange={(e) => dispatch(setProfileImageSrc(e.target.files[0]))}
               // onChange={(e) => console.log(e.target.files?.[0])}
             />

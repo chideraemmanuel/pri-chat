@@ -1,4 +1,4 @@
-import { auth, db } from "@/config/firebase";
+import { auth, db } from '@/config/firebase';
 import {
   Timestamp,
   collection,
@@ -6,52 +6,8 @@ import {
   onSnapshot,
   orderBy,
   query,
-} from "firebase/firestore";
-import { useState, useEffect } from "react";
-import { useQuery } from "react-query";
-
-// // export const useGetChats = async (uid: string) => {
-// //   const chatsReference = collection(db, `users/${uid}/chats`);
-
-// //   const response = await getDocs(chatsReference);
-
-// //   const data = response.docs.map((item) => {
-// //     return { ...item.data(), id: item.id };
-// //   });
-
-// //   //   console.log(data);
-// //   return data;
-// // };
-
-// // const getChats = async ({ queryKey }: { queryKey: any[] }) => {
-// const getChats = async () => {
-//   // const [data, setData] = useState<any>(null);
-
-//   //   const uid = queryKey[1];
-
-//   //   const chatsReference = collection(db, `users/${uid}/chats`);
-//   const chatsReference = collection(db, `users/${auth.currentUser?.uid}/chats`);
-
-//   const response = await getDocs(chatsReference);
-
-//   onSnapshot(chatsReference, (snapshot) => {
-//     const result = snapshot.docs.map((item) => {
-//       return { ...item.data(), id: item.id };
-//     });
-
-//     // setData(result);
-//     return result;
-//   });
-
-//   // console.log("Chats", data);
-//   // return data;
-// };
-
-// // export const useGetChats = (uid: string) => {
-// export const useGetChats = () => {
-//   //   return useQuery(["get chats", uid], getChats);
-//   return useQuery(["get chats", auth.currentUser?.uid], getChats);
-// };
+} from 'firebase/firestore';
+import { useState, useEffect } from 'react';
 
 export interface ChatTypes {
   chatId: string;
@@ -80,7 +36,7 @@ export const useGetChats = () => {
       chatsReference,
       // orderBy("latestMessage"),
       // orderBy("sentAt", "asc")
-      orderBy("sentAt", "desc")
+      orderBy('sentAt', 'desc')
     );
 
     const getChats = () => {
@@ -89,8 +45,10 @@ export const useGetChats = () => {
           return { ...item.data(), chatId: item.id };
         });
 
+        // @ts-ignore
         setData(result);
-        console.log(result);
+        setIsLoading(false);
+        // console.log(result);
       });
 
       return () => {
@@ -101,5 +59,5 @@ export const useGetChats = () => {
     auth.currentUser?.uid && getChats();
   }, []);
 
-  return data;
+  return { data, isLoading };
 };

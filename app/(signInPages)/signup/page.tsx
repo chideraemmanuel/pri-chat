@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Logo from "@/components/logo/Logo";
-import styles from "./page.module.scss";
-import FormInput from "@/components/formInput/FormInput";
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreTypes } from "@/redux/store";
+import Logo from '@/components/logo/Logo';
+import styles from './page.module.scss';
+import FormInput from '@/components/formInput/FormInput';
+import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { StoreTypes } from '@/redux/store';
 import {
   clearSignUpEmailError,
   clearSignUpFirstNameError,
@@ -22,15 +22,15 @@ import {
   setSignUpLastNameError,
   setSignUpPassword,
   setSignUpPasswordError,
-} from "@/redux/slices/signInSlice";
-import { auth } from "@/config/firebase";
-import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
-import { useSignUp } from "@/hooks/useSignUp";
-import { onAuthStateChanged } from "firebase/auth";
-import { setCurrentUser } from "@/redux/slices/authSlice";
-import { error } from "console";
-import FullScreenLoader from "@/components/fullScreenLoader/FullScreenLoader";
+} from '@/redux/slices/signInSlice';
+import { auth } from '@/config/firebase';
+import { useRouter } from 'next/navigation';
+import { FormEvent } from 'react';
+import { useSignUp } from '@/hooks/useSignUp';
+import { onAuthStateChanged } from 'firebase/auth';
+import { setCurrentUser } from '@/redux/slices/authSlice';
+import { error } from 'console';
+import FullScreenLoader from '@/components/fullScreenLoader/FullScreenLoader';
 
 const SignUp: React.FC = () => {
   const { firstName, lastName, email, password } = useSelector(
@@ -49,29 +49,6 @@ const SignUp: React.FC = () => {
 
   const emailRegex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,5})(\.[a-z]{2,5})?$/;
 
-  // const validateform = () => {
-  //   if (firstName.value.length === 0) {
-  //     dispatch(setSignUpFirstNameError("Please fill out this field"));
-  //     return;
-  //   }
-  //   if (lastName.value.length === 0) {
-  //     dispatch(setSignUpLastNameError("Please fill out this field"));
-  //     return;
-  //   }
-  //   if (email.value.length === 0) {
-  //     dispatch(setSignUpEmailError("Please fill out this field"));
-  //     return;
-  //   }
-  //   if (!emailRegex.test(email.value)) {
-  //     dispatch(setSignUpEmailError("Please enter a valid email"));
-  //     return;
-  //   }
-  //   if (password.value.length < 6) {
-  //     dispatch(setSignUpPasswordError("Password should be up to 6 characters"));
-  //     return;
-  //   }
-  // };
-
   // const { mutate: signUp, isLoading: isSigningUp } = useSignUp();
   const { mutate: signUp, isLoading: isSigningUp, error } = useSignUp();
 
@@ -80,23 +57,23 @@ const SignUp: React.FC = () => {
     dispatch(resetErrors());
 
     if (firstName.value.length === 0) {
-      dispatch(setSignUpFirstNameError("Please fill out this field"));
+      dispatch(setSignUpFirstNameError('Please fill out this field'));
       return;
     }
     if (lastName.value.length === 0) {
-      dispatch(setSignUpLastNameError("Please fill out this field"));
+      dispatch(setSignUpLastNameError('Please fill out this field'));
       return;
     }
     if (email.value.length === 0) {
-      dispatch(setSignUpEmailError("Please fill out this field"));
+      dispatch(setSignUpEmailError('Please fill out this field'));
       return;
     }
     if (!emailRegex.test(email.value)) {
-      dispatch(setSignUpEmailError("Please enter a valid email"));
+      dispatch(setSignUpEmailError('Please enter a valid email'));
       return;
     }
     if (password.value.length < 6) {
-      dispatch(setSignUpPasswordError("Password should be up to 6 characters"));
+      dispatch(setSignUpPasswordError('Password should be up to 6 characters'));
       return;
     }
 
@@ -112,7 +89,7 @@ const SignUp: React.FC = () => {
     if (error) {
       // DON'T RESET FORM FIELDS IF THERE ARE ANY ERRORS
       console.log(error);
-      console.log("will not reset form fields");
+      console.log('will not reset form fields');
       return;
     }
 
@@ -174,12 +151,12 @@ const SignUp: React.FC = () => {
 
               {/* <button>Sign up</button> */}
               <button disabled={isSigningUp}>
-                {isSigningUp ? "Creating account..." : "Sign up"}
+                {isSigningUp ? 'Creating account...' : 'Sign up'}
               </button>
             </form>
 
             <p>
-              Already have an account?{" "}
+              Already have an account?{' '}
               <Link href="/login" onClick={() => dispatch(resetSignInForm())}>
                 Login
               </Link>

@@ -1,6 +1,6 @@
-import { auth, db } from "@/config/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { useQuery } from "react-query";
+import { auth, db } from '@/config/firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { useQuery } from 'react-query';
 
 interface UserTypes {
   uid: string;
@@ -13,12 +13,13 @@ interface UserTypes {
 const findUsers = async ({ queryKey }: { queryKey: any[] }) => {
   const keyword = queryKey[1];
 
-  const usersCollectionReference = collection(db, "users");
+  const usersCollectionReference = collection(db, 'users');
 
-  const q = query(usersCollectionReference, where("firstName", "==", keyword));
+  const q = query(usersCollectionReference, where('firstName', '==', keyword));
 
   const response = await getDocs(q);
 
+  // @ts-ignore
   const result: UserTypes[] = response.docs.map((item) => {
     return { ...item.data(), id: item.id };
   });
@@ -31,5 +32,5 @@ const findUsers = async ({ queryKey }: { queryKey: any[] }) => {
 };
 
 export const useFindUsers = (keyword: string) => {
-  return useQuery(["find users", keyword], findUsers);
+  return useQuery(['find users', keyword], findUsers);
 };

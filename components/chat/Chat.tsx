@@ -1,14 +1,14 @@
-import Image from "next/image";
-import styles from "./Chat.module.scss";
-import defaultProfileImage from "@/assets/profile.jpg";
-import { useGetUser } from "@/hooks/useGetUser";
-import { useDispatch } from "react-redux";
-import { setActiveChat } from "@/redux/slices/chatsSlice";
-import { auth } from "@/config/firebase";
-import { FaCheck } from "react-icons/fa";
-import { Timestamp } from "firebase/firestore";
-import moment from "moment";
-import { ChatTypes } from "@/hooks/useGetChats";
+import Image from 'next/image';
+import styles from './Chat.module.scss';
+import defaultProfileImage from '@/assets/profile.jpg';
+import { useGetUser } from '@/hooks/useGetUser';
+import { useDispatch } from 'react-redux';
+import { setActiveChat } from '@/redux/slices/chatsSlice';
+import { auth } from '@/config/firebase';
+import { FaCheck } from 'react-icons/fa';
+import { Timestamp } from 'firebase/firestore';
+import moment from 'moment';
+import { ChatTypes } from '@/hooks/useGetChats';
 
 // interface Props {
 //   chatId: string;
@@ -37,9 +37,13 @@ const Chat: React.FC<ChatTypes> = ({
   const handleClick = () => {
     dispatch(
       setActiveChat({
+        // @ts-ignore
         receiverUid: sender?.uid,
+        // @ts-ignore
         receiverFirstName: sender?.firstName,
+        // @ts-ignore
         receiverLastName: sender?.lastName,
+        // @ts-ignore
         receiverProfileImage: sender?.profileImage,
       })
     );
@@ -73,7 +77,7 @@ const Chat: React.FC<ChatTypes> = ({
 
           <div className={styles.chat__tag}>
             <span className={styles.chat__tag_time}>
-              {moment(sentAt.toDate()).format("LT")}
+              {moment(sentAt.toDate()).format('LT')}
             </span>
             {/* <span className={styles.chat__tag_time}>9:37 PM</span> */}
             {/* <div className={styles.chat__tag_unread}></div> */}

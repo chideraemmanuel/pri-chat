@@ -147,10 +147,6 @@
       font-size: var(--sm-font);
       color: var(--gray-700);
 
-      //   font-size: 16px;
-      //   transform: scale(calc(12px / 16px));
-      //   transform-origin: left top;
-
       @media screen and (max-width: 1024px) {
         transform: scale(calc(15px / 16px));
         transform-origin: left top;

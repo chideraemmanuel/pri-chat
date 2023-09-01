@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Message from "@/components/message/Message";
-import styles from "./ConversationBox.module.scss";
+import Message from '@/components/message/Message';
+import styles from './ConversationBox.module.scss';
 import {
   FiArrowLeft,
   FiChevronsRight,
@@ -9,17 +9,17 @@ import {
   FiImage,
   FiSend,
   FiX,
-} from "react-icons/fi";
-import { FaClipboard } from "react-icons/fa";
-import Image from "next/image";
-import defaultProfileImage from "@/assets/profile.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { closeActiveChat, setMessage } from "@/redux/slices/chatsSlice";
-import { StoreTypes } from "@/redux/store";
-import { useSendMessage } from "@/hooks/useSendMessage";
-import { serverTimestamp } from "firebase/firestore";
-import { auth } from "@/config/firebase";
-import { useGetConversation } from "@/hooks/useGetConversation";
+} from 'react-icons/fi';
+import { FaClipboard } from 'react-icons/fa';
+import Image from 'next/image';
+import defaultProfileImage from '@/assets/profile.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeActiveChat, setMessage } from '@/redux/slices/chatsSlice';
+import { StoreTypes } from '@/redux/store';
+import { useSendMessage } from '@/hooks/useSendMessage';
+import { serverTimestamp } from 'firebase/firestore';
+import { auth } from '@/config/firebase';
+import { useGetConversation } from '@/hooks/useGetConversation';
 
 const ConversationBox: React.FC = () => {
   const { activeChat, message } = useSelector(
@@ -28,16 +28,16 @@ const ConversationBox: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  // @ts-ignore
   const conversation = useGetConversation(activeChat?.receiverUid);
 
   // console.log(conversation);
-  console.log(conversation);
 
   const { mutate: sendMessage } = useSendMessage();
 
   const handleSend = () => {
     if (!navigator.onLine) {
-      alert("Please check your internet connection");
+      alert('Please check your internet connection');
       return;
     }
 
@@ -57,7 +57,7 @@ const ConversationBox: React.FC = () => {
       },
     });
 
-    dispatch(setMessage(""));
+    dispatch(setMessage(''));
   };
 
   return (
@@ -111,8 +111,8 @@ const ConversationBox: React.FC = () => {
                 <Message
                   type={
                     auth.currentUser?.uid === message.senderUid
-                      ? "sent"
-                      : "received"
+                      ? 'sent'
+                      : 'received'
                   }
                   message={message}
                 />

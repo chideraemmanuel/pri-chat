@@ -1,17 +1,6 @@
 .chats {
-  //   height: calc(100vh - 20px - var(--base-font) - 20px);
-  //   overflow: scroll;
   padding: 0 15px;
   padding-top: 15px;
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: 5px;
-
-  //   background-color: #fff;
-
-  //   @media (prefers-color-scheme: dark) {
-  //     background-color: var(--gray-100);
-  //   }
 
   &::-webkit-scrollbar {
     width: 5px;

@@ -1,19 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface ProfileStateTypes {
   firstName: string;
   lastName: string;
-  profileImage: string | null | File;
+  profileImage: undefined | null | File;
 }
 
 const initialState: ProfileStateTypes = {
-  firstName: "",
-  lastName: "",
+  firstName: '',
+  lastName: '',
   profileImage: null,
 };
 
 const profileSlice = createSlice({
-  name: "profile",
+  name: 'profile',
   initialState,
   reducers: {
     setProfileFirstName: (
@@ -30,7 +30,7 @@ const profileSlice = createSlice({
     },
     setProfileImageSrc: (
       state: ProfileStateTypes,
-      action: { payload: string | null | File }
+      action: { payload: undefined | null | File }
     ) => {
       state.profileImage = action.payload;
     },

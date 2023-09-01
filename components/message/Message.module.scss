@@ -1,25 +1,13 @@
-// .message {
-//   background-color: var(--primary-color);
-//   color: #fff;
-//   display: inline-block;
-
-//   align-self: flex-end;
-// }
 .message_sent {
   background-color: var(--primary-color);
   color: #fff;
   display: flex;
   align-items: center;
   gap: max(0.7vw, 15px);
-  //   width: min(70%, 700px);
   width: min(70%, fit-content);
-
   align-self: flex-end;
-
-  //   padding: max(0.7vh, 10px) max(0.7vw, 15px);
   position: relative;
   padding: 7px max(0.7vw, 15px);
-  //   padding-right: max(7vw, 50px);
   border-radius: 7px 0 0 7px;
 
   p {
@@ -48,7 +36,6 @@
   flex-direction: row-reverse;
   align-items: center;
   gap: max(0.7vw, 15px);
-  //   width: min(70%, 700px);
   width: min(70%, fit-content);
   max-width: 90%;
 
